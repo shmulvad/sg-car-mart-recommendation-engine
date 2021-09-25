@@ -1,0 +1,240 @@
+{'climatic a/c': []}
+{'si-drive': []}
+{'8 speed automatic': [('8 speed automatic', 1.0000001), ('5 speed automatic', 0.8832749), ('4 speed automatic', 0.8447683)]}
+{'responsive 7 speed cvt auto transmission': [('responsive 7 speed cvt auto transmission', 1.0000001), ('responsive 7 speed cvt transmission', 0.9676276), ('7 speed cvt auto transmission', 0.96348774), ('7 speed cvt automatic transmission', 0.9503419), ('5 speed cvt auto transmission', 0.9354127), ('transmission 7-speed  cvt', 0.9341337), ('7 speed cvt transmission', 0.93264586), ('6 speed cvt transmission', 0.9089545), ('cvt auto transmission', 0.90864474), ('smooth 4 speed automatic cvt transmission', 0.90109277), ('smooth cvt-i auto transmission', 0.89983994), ('cvt-i auto transmission', 0.8955239), ('e-cvt auto transmission', 0.89304185), ('7 speed  cvt steptronic automatic transmission', 0.87694544), ('7 speed cvt steptronic automatic transmission', 0.87694544), ('smooth cvt automatic transmission', 0.873026), ('cvt automatic transmission', 0.8670313), ('7 speed cvt auto transmission with sports sequential shift', 0.8646565), ('super cvt-i auto transmission', 0.86035687), ('7-speed auto cvt', 0.85738134), ('7 speed cvt auto', 0.85687953), ('smooth cvt transmission', 0.8544536), ('lineartronic cvt auto transmission', 0.8482605), ('7-speed super cvt-i transmission', 0.84661216), ('responsive 6 speed auto transmission', 0.8459808), ('cvt  transmission', 0.8427561), ('cvt transmission', 0.8427561), ('6-speed cvt auto', 0.8397974), ('7-speed auto transmission', 0.83737355), ('7 speed auto transmission', 0.8372429), ('x-tronic cvt auto transmission', 0.8350418), ('6 speed x-tronic cvt transmission', 0.833095), ('cvt auto steptronic transmission', 0.83277065), ('7 speed dct auto transmission', 0.829998)]}
+{'producing 181bhp': [('producing 181bhp', 1.0000004), ('producing 227bhp', 0.89459), ('producing 154bhp', 0.8854048), ('producing 120bhp', 0.86883396), ('producing 152bhp', 0.86755735), ('producing 268bhp', 0.86416185), ('producing 165bhp & 198nm!', 0.8578186), ('producing 296bhp', 0.85609215)]}
+{'0 to 100km/h in 4.8s': [('0 to 100km/h in 4.8s', 1.0000002), ('0-100km/h in 4.8s', 0.98460466), ('0 to 100km/h in 4.1s', 0.98086697), ('0 to 100km/h in 8.2s', 0.97465086), ('0-100km/h in 4.5s', 0.9724996), ('0 to 100km/h in 7.8s', 0.9707254), ('0 to 100km/h in just 4.7s', 0.9676193), ('0-100km/h in 4s', 0.9664803), ('0 to 100km/h in 6.2s', 0.9664495), ('0-100km/h in 4.1s', 0.9649638), ('0-100km/h in 8.2s', 0.9565713), ('0-100km/h in 7.3s', 0.95635206), ('0-100km/h in 7.8s', 0.9549199), ('with 0 to 100km/h in 7.9s', 0.95257944), ('0-100km/h in 8.1s', 0.94931626), ('0-100km/h in 6.5s', 0.94770926), ('0 to 100km/h in 12.1s', 0.9469829), ('0 to 100km/h in 11.2s', 0.94339246), ('0-100km/h in 4.5secs.', 0.94231254), ('0-100km/h in 3.7s', 0.9405597), ('0 to 100km/h in 11.7s', 0.9393789), ('0 to 100km/h in 9.9s', 0.9384635), ('0-100km/h in 9.7s', 0.93431246), ('0-100km/h in 10.6s', 0.931924), ('0-100km/h in 10.3s', 0.9313609), ('0 to 100km/h at 6.5 sec', 0.9313361), ('0-100km/h in 11.5s', 0.92843807), ('0-100km/h in 11.7s', 0.91919285), ('0 to 100km/h in 3 sec', 0.91768426), ('0-100km/h in 10.2s', 0.91753834), ('0 to 100 km/h in 3.4s', 0.9155734), ('0 to 100 km/h in 8.9s', 0.91515434), ('0 to 100km/h 5.7 secs', 0.9110302), ('0-100km/h in 9.9 sec', 0.9078007), ('0-100km/h 4.6 secs', 0.9044962), ('0 to 100km/h in 4.9 seconds', 0.90176624), ('0-100 km/h in 4.5 sec.', 0.9011228)]}
+{'turbocharged engine': [('turbocharged engine', 1.0000002), ('1.8l turbocharged engine', 0.9047919), ('1.4l turbocharged engine', 0.90107983), ('1.2l turbocharged engine', 0.9000551), ('1.3l turbocharged engine', 0.8978733), ('1.6l turbocharged engine', 0.8934029), ('1.0 turbocharged engine', 0.8808821), ('2.0l turbocharged engine', 0.880357), ('1.0l turbocharged engine', 0.87984824), ('160bhp turbocharged engine', 0.8793438), ('powerful 2.0l turbocharged engine', 0.87562895), ('powerful and economical 1.6l turbocharged engine', 0.8661154), ('powerful 2.5l turbocharged engine', 0.86410487), ('163bhp turbocharged engine', 0.8632669), ('4 cylinder inline turbocharged engine', 0.85835797), ('1.8 turbo charged engine', 0.8549716), ('powerful and economical 1.6l powerful turbocharged engine', 0.85434383), ('2l turbo-charged engine', 0.8453574), ('1.4l turbo engine', 0.8441613), ('123bhp turbocharged engine', 0.83398575), ('4 cylinders turbocharged engine', 0.8337304), ('3.6l twin-turbocharged engine', 0.83008367), ('1.0l turbo-charged engine', 0.82981634), ('2.0l 4 cylinder turbocharged engine', 0.8298039), ('332cc inline four turbocharged engine', 0.827998), ('powerful 2.0l turbocharged engine producing 237hp', 0.82794154), ('2.0l turbocharged engine producing 207bhp', 0.82620263), ('powerful 2.0l 4 cylinder inline turbocharged engine', 0.82502717), ('1.5 diesel turbocharged engine', 0.8249375), ('powered by 1.6l 4 cylinder turbocharged engine', 0.823932), ('1.8l turbocharged engine producing 154 bhp', 0.8215631), ('1.5l twin power turbocharged engine', 0.8211727), ('powerful twinpower turbo engine', 0.81840754), ('1.6l 4 cylinder inline turbocharged engine', 0.8163428), ('4-cylinder in-line turbocharged engine producing 154hp', 0.8162043), ('2.0l turbocharged engine 181bhp', 0.81572294), ('1.0 turbo engine', 0.81498796), ('1.2l tsi turbocharged engine', 0.8124984), ('powerful 1.4l tsi turbocharged engine', 0.81244135), ('powerful & economical 1.6l twin power turbocharged engine', 0.81237906), ('b58 3.0l 6 cylinder turbocharged engine', 0.8103136), ('powered by 2.0l turbocharged engine producing 167bhp', 0.80825615), ('fully stock 1.5 twinpower turbocharged engine with 8 transmission', 0.80589646), ('1.6l turbocharged engine producing 154 bhp', 0.80543447), ('responsive 2.0l turbocharged engine producing 237hp', 0.80394024), ('3.8l v6 twin turbocharged engine', 0.80037665), ('reliable 1.6l 4 cylinder inline turbocharged engine', 0.7981), ('powered by 1497cc 4 cylinders inline turbocharged engine', 0.7961351), ('powered by a newly developed 2 litre four cylinder turbo engine with 301 horsepower', 0.79604715), ('powerful 1.4l twin charged turbo engine', 0.79327387), ('powered by an efficient 2.0l 4 cylinder inline turbocharged engine mated to 9g-tronic', 0.7927788)]}
+{'105 bhp': [('109 bhp', 0.91206205), ('130 bhp', 0.911921), ('113 bhp', 0.9116941), ('97 bhp', 0.90769327), ('120 bhp', 0.907197), ('108 bhp', 0.90634406), ('125 bhp', 0.9005675), ('715 bhp', 0.9004904), ('77 bhp', 0.89599854), ('123 bhp', 0.8920006), ('127 bhp', 0.88869894), ('118 bhp', 0.8828661), ('129 bhp', 0.87473196), ('128 bhp', 0.8739166), ('185 bhp', 0.8576181), ('bhp: 130.', 0.85315555)]}
+{'electronic seat': [('electric seat', 0.8524509)]}
+{'amg flat bottom steering': []}
+{'bmw 2.0l twinpower turbo engine at181bhp/290nm': [('bmw 2.0l twin power turbo engine with 181bhp and 270nm torque', 0.92286277), ('bmw 2.0l twin turbo engine', 0.91479677), ('bmw 1.6l twin power turbo engine', 0.9046261), ('bmw 1.5l twin powered turbo engine', 0.89415896), ('bmw twinpower turbo 3-cylinder engine with 140bhp', 0.8936842), ('bmw twinpower turbo engine', 0.8922944), ('bmw twinpower turbo 3 cylinder engine at 102bhp', 0.88189256), ('bmw twinpower turbo 3-cylinder engine with 138bhp', 0.8815749), ('1.5l bmw twinpower turbo 3 cylinder engine with 116bhp', 0.88154876), ('smooth bmw 1.6l twin power turbo engine', 0.8764283), ('bmw twinpower turbo', 0.8667274), ('bmw twin power turbo 3 cylinder engine with 107bhp', 0.86083186), ('bmw twinpower turbo 3-cylinder engine', 0.8544927), ('fuel efficient bmw twinpower 1.5l turbo 3 cylinder engine', 0.854348), ('bmw 3.0l 6 cylinder twinpower turbocharged engine producing 315bhp', 0.850215), ('powerful bmw 1.5l diesel twinpower turbo delivered 113bhp and 270nm torque', 0.84834874), ('bmw twinpower turbo 3 cylinder engine producing 107bhp', 0.84632045), ('bmw twin power turbo 3 cylinder engine', 0.8431828), ('bmw 1.5l twin power turbo engine producing 134 bhp and 220 nm torque', 0.8400309)]}
+{'abs and etc': [('abs etc', 0.9762789), ('abs', 0.9182837)]}
+{'60/40 knockdown rear seats': [('knockdown rear seats', 0.91741794), ('knockdown rear seats.', 0.9046433), ('knockdown rear seats and etc', 0.9004063), ('foldable rear seats', 0.7926981)]}
+{'v8 4.2l bhp 420hp and 430nm of torque': [('powered by a 4.0-litre twin-turbo v8 engine producing 603 bhp and 850nm of torque', 0.81672806), ('powered by a 2l inline 4 engine producing 183bhp and 290nm of torque', 0.796104), ('producing 335 bhp & 450nm torque', 0.7884598), ('producing 640 bhp & 800 nm of torque', 0.7606854)]}
+{'9g-tronic transmission': [('9g tronic transmission', 0.9881037), ('9g tronic  transmission', 0.9881037), ('transmission 9g-tronic', 0.9827369), ('7g-tronic  transmission', 0.9588347), ('7g-tronic transmission', 0.9588347), ('7g tronic transmission', 0.9469473), ('7-g tronic transmission', 0.9190598), ('9g-tronic auto transmission', 0.9134255), ('9g tronic auto transmission', 0.90817535), ('9g-tronic automatic transmission', 0.8964731)]}
+{'7airbags': [('7 airbags', 0.86841583), ('7 x airbags', 0.84437364), ('8 airbags', 0.8277473), ('6 airbags', 0.81618536), ('6 x airbags', 0.7948346), ('6 airbag', 0.79003054)]}
+{'rear wheel drive sports car by car manufacturer alpine': []}
+{'auto retractable side mirrors': [('retractable side mirrors', 0.96093374), ('auto retractable mirrors', 0.96018827), ('retractable side signal mirrors', 0.91303027), ('retractable side mirror', 0.8923615), ('auto retractable side mirrors and smart key', 0.8731556), ('auto flipping side mirrors', 0.8603504)]}
+{'362cc 4 cylinders inline 16 valve dohc with vvt-i engine': [('1.6l 4 cylinders 16 valves dohc vvt engine', 0.9441512), ('2.5l 4 cylinders inline 16 valve dohc vvt hybrid engine', 0.9394672), ('1.8l 4 cylinder inline 16 valve dohc vvt-i engine', 0.93048805), ('responsive and fuel efficient 4 cylinders 16 valves dohc vvt engine', 0.9146199), ('2.0l powerful 16 valves 4-cylinders inline dohc dual vvt-i valvematic engine', 0.91261923), ('1.6l 4-cylinders in-line 16-valves dohc vvt-i engine producing 121bhp', 0.9123452), ('2.0l 4 cylinders inline 16 valves dohc engine', 0.9114209), ('1.4l 4 cylinders inline 16 valve dohc', 0.90999776), ('powerful and responsive 2.0l 4 cylinders inline 16 valves dohc vvt-i', 0.90645754), ('4 cylinders inline 16 valve dohc', 0.90451145), ('toyota 1.8l 4 cylinders inline 16 valve dohc vvt-i hybrid engine', 0.90133846), ('1.6l 4 cylinders dohc 16v vvt engine', 0.89856404), ('4-cylinder in-line 16-valve dohc with vvt-i', 0.8956652), ('1.6l in-line 4 cylinders dohc 16v dual vvt-i engine', 0.8956121), ('reliable 2.4l 4 cylinders 16 valve dohc engine', 0.8944975), ('elegance 1.6l four cylinders inline 16 valves dohc dual vvt-i valvematic engine', 0.89420587), ('responsive and powerful 1.6l 4 cylinders inline 16 valve sohc engine', 0.8940726), ('2.0l inline 4 cylinders dohc 16v engine', 0.88951856), ('smooth 1.6l four cylinders inline 16 valves dohc dual vvt-i valvematic engine', 0.88902164), ('1.6 inline 4 cylinders 16 valve sohc', 0.8885352), ('responsive and powerful 1.6l 4-cylinders inline 16 valves dohc engine', 0.88752246), ('4 cylinder 16 valve dohc', 0.8830295), ('4 cylinders 16 valve dohc', 0.8826071), ('140 bhp 1.8l 4 cylinder inline 16-valve dohc with dual vvt-i valvematic engine', 0.8768125), ('1.5l dohc 16 valves vvt-i engine', 0.87653106), ('4-cylinder in-line 16-valve dohc vvt-ie produce 170bhp', 0.87438345), ('1.5l dohc vvt-i 16 valves engine', 0.87359506), ('powerful 4 cylinders inline 16 valve dohc skyactive-g engine', 0.87299514), ('1.8l 4-cylinders dohc with dual vvt-i engine', 0.8726829), ('1.5l 4-cylinder in-line 16-valve dohc dual vvt-i engine', 0.86745805), ('4 cylinder inline 16 valve dohc dual cvvt engine', 0.8667721), ('smooth 4-cylinder in-line 16-valve dohc vvt-i engine', 0.8655068), ('16 valve dohc vvt-i engine', 0.86460716), ('responsive1.6l 4 cylinders dohc 16v dual vvt-i engine', 0.86379457), ('4 cylinders inline 16 valves dohc cvvt', 0.86347026), ('2.0l 4 cylinder 16 valve dohc engine', 0.8608918), ('2.0l four cylinder 16 valve horizontally dohc engine', 0.86049265), ('responsive yet fuel efficient 1.6l 4 cylinders dohc 16v vvt engine', 0.8587696), ('1.5l 4 cylinders inline 16 valve dohc skyactiv-g', 0.85467845), ('4-cylinder in-line 16-valve dohc', 0.8518817), ('1.6l 4 cylinders inline 16 valves dohc dual cvvt engine producing 127 bhp', 0.8479086), ('4 cylinders dual vvt-i engine', 0.8474587), ('1.8l powerful and reliable 16 valves vvt-i dohc engine', 0.8457206), ('solid 1.5l cvt 4 cylinders inline 16v dohc engine', 0.84564817), ('1.6l fuel-efficient 16 valve dohc vvt-i engine', 0.84274024), ('fuel-efficient and powerful 1.5 litre vvt-i 16 valves inline dohc engine', 0.84124994), ('responsive and powerful 1.6l 4 cylinder inline 16 valve sohc engine', 0.8403321), ('1.5l 4 cylinder inline 16 valve dohc i-vtec', 0.840208), ('1.8l 4 cylinders dohc 16v hybrid engine', 0.8394368), ('1.5l 4 cylinders inline 16 valve dohc mivec turbocharged', 0.8356109), ('4 cylinders inline 16 valve turbocharged engine with 250bhp', 0.83280516), ('2.0l 4 cylinder inline 16 valve dohc twin-scroll turbocharged dual vvt-iw', 0.8316764)]}
+{'toyota safety sense c': [('toyota  safety sense', 0.93254817)]}
+{'6 speed super ect gearbox': [('6-speed super ect gearbox', 0.9942272), ('super cvt-i gearbox', 0.8206285), ('6 speed cvt gearbox', 0.80972224), ('super ect 6-speed auto', 0.80754715)]}
+{'7 speed auto transmission with paddle shifters': [('8 speed auto transmission with paddle shifters', 0.98512006), ('8 speed auto transmission with paddle shifter', 0.9701783), ('6 speed automatic transmission with paddle shifters', 0.9594257), ('5 speed automatic transmission with paddle shifter', 0.9500003), ('6 speed transmission with paddle shifter', 0.92889374), ('7g-dct auto transmission with paddle shifters', 0.9098216), ('7 speed automatic with paddle shifters', 0.8982316), ('9g-tronic auto transmission with paddle shifters', 0.8968543), ('smooth 6 speed auto transmission with tiptronic mode/paddle shifters', 0.8941184), ('8 speed steptronic transmission with paddle shifters', 0.88487625), ('8 speed  steptronic transmission with paddle shifters', 0.88487625), ('6 speed dual clutch automatic transmission with paddle shifters', 0.8787445), ('6 speed auto with paddle shifters', 0.8758176), ('5 speed automatic with paddle shifters', 0.87188697), ('cvt auto transmission with paddle shifters', 0.8708837), ('7 speed dual clutch automatic transmission with paddle shifter', 0.86869746), ('6-speed rwd transmission with paddle shifter', 0.86734647), ('7g-dct automatic transmission with paddle shifter', 0.8665651), ('7 speed dsg transmission with paddle shifters', 0.8659275), ('6 speed auto with paddle shifter', 0.8610838), ('7g-dct auto with paddle shifters', 0.85424715), ('7g-dct automatic with paddle shifters', 0.83302534)]}
+{'auto led headlights and drl': [('auto led headlights & drls', 0.97680455), ('led drl/headlights', 0.9307262), ('auto led headlights', 0.9279891), ('led auto headlights', 0.91919154), ('led headlights', 0.86958885), ('auto headlights', 0.8362788)]}
+{'fc of up to 18km per litre!': [('fc of 16.15km/l', 0.7475299)]}
+{'auto climatic aircon': [('climatic auto aircon', 0.9859774), ('auto climatic aircon control', 0.94867074), ('auto climatic aircon controls', 0.9415493), ('climatic aircon', 0.9359548), ('auto climate aircon', 0.92692393), ('climatic aircon control', 0.9105353), ('climatic control aircon', 0.9104648), ('climatic aircon controls', 0.90021974), ('climate aircon', 0.8970503), ('auto climate aircon control', 0.87084854)]}
+{'responsive 2.5l inline 6 cylinders engine mated 8 speed at': [('powerful 2.5l inline 6 cylinders engine', 0.884472), ('2.5l inline 6 cylinders engine', 0.8705388), ('powered by 1.6l 4 cylinders inline turbocharged engine', 0.85358226), ('1.6l turbocharged inline 4 cylinders engine', 0.8463446), ('powerful 2.0l 4 cylinders inline turbocharged engine', 0.8438195), ('responsive four cylinders 1.2l turbocharged engine', 0.84296983), ('2.0l inline 4 cylinders engine', 0.8416915), ('1.6l inline 4 cylinders 16v turbocharged engine', 0.8381234), ('responsive 1.6 4 cylinders inline turbocharged engine mated with silky smooth 7g-tronic auto transmission', 0.83008677), ('1.4l inline 4 cylinders turbocharged engine', 0.8285636), ('3.0 inline 6 cylinders engine', 0.82377464), ('2.0l 4-cylinder inline engine', 0.8193101), ('2.0l twin power turbo-charged inline 4 cylinders engine', 0.8190309), ('responsive and fuel efficient 1.6l 4 cylinders inline dual-cvvt mated to 6 speed auto', 0.81860316), ('powerful 3l 6 cylinder inline engine', 0.8073854), ('responsive and fuel efficient 1.5l 4 cylinders 16 dohv mivec engine', 0.8053673), ('1.6l inline 4 cylinders turbocharge engine', 0.8030617), ('2.5l inline 6-cylinders engine producing 174bhp', 0.7938201), ('iconic 6-cylinder 3.6l engine mated with pdk gearbox', 0.78884137), ('2.2l 4 cylinders inline turbocharged diesel engine with 8 speed zf transmission', 0.7880933), ('1.6l 4 cylinders turbo diesel engine', 0.78357816), ('reliable 1.6l 4 cylinders inline dohc 16v dual cvvt engine delivering good fuel economy', 0.77956307)]}
+{'sports mode': [('sport mode', 0.9531219)]}
+{'naturally aspirated and fashioned in absolutely the right way! ferrari-built 4.7l v8 engine at a whopping 453bhp/520nm! zf mated': []}
+{'keyless entry/start': [('keyless entry/ start', 0.9999998), ('keyless entry / start', 0.9999998), ('keyless start/entry', 0.9909305), ('keyless entry and start', 0.9880357), ('keyless entry/start/start', 0.97890097), ('keyless entry start', 0.97519565), ('and keyless entry/start', 0.9747419), ('keyless entry/start and etc', 0.96988255), ('keyless entry/start/stop', 0.94924796), ('keyless start/ stop/ entry', 0.93809575), ('keyless entry start/stop', 0.9374092), ('keyless entry and start/stop', 0.9366401), ('keyless entry & start/stop', 0.9365907), ('keyless entry/start-stop', 0.9347974), ('full keyless entry/start', 0.93461), ('keyless entry push/start', 0.92230237)]}
+{'dual aircon': [('dual zone aircon', 0.9152298), ('aircon', 0.8490647), ('dual climate aircon', 0.8388528), ('multi zone aircon', 0.8378734)]}
+{'180nm of torque': [('180nm torque', 0.9830664), ('190nm of torque', 0.951466), ('200nm of torque', 0.9436026), ('380nm of torque', 0.9407908), ('250nm torque', 0.9381947), ('270nm of torque', 0.93779457), ('193nm torque', 0.9337566), ('450nm of torque', 0.9334647), ('220nm of torque', 0.9334193), ('190nm torque', 0.9304149), ('torque 250nm', 0.9302699), ('170nm torque', 0.9283946), ('750nm torque', 0.92780364), ('370nm of torque', 0.92384434), ('145nm torque', 0.92380166), ('200nm torque', 0.92358565), ('270nm torque', 0.9224621), ('320nm torque', 0.9199224), ('240nm torque.', 0.9190681), ('300nm torque', 0.91795164), ('400nm torque', 0.91766953), ('142nm torque', 0.91553074), ('221nm torque', 0.91460526), ('220nm torque', 0.91022795), ('344nm torque', 0.909996), ('torque of 450nm', 0.90969706), ('155nm torque', 0.90714496), ('torque of 900nm', 0.906598), ('torque 500nm', 0.896472), ('780nm torque', 0.89536864), ('torque 760nm', 0.89531076), ('torque 220nm', 0.89483726), ('torque 400nm', 0.8941784), ('140bhp 220nm of torque', 0.8890182), ('290nm torque', 0.8848606), ('800nm torque', 0.8847665), ('staggering 603hp/850nm of torque', 0.88195044)]}
+{'blind spot': [('blind spot detection', 0.8914592)]}
+{'multiple driving modes - eco pro': [('sport/eco driving mode', 0.8005092), ('eco driving', 0.7994837), ('eco pro drive mode', 0.796945)]}
+{'1.5l dohc skyactiv engine': [('1.5l dohc skyactiv-g engine', 0.9547754), ('powerful 2.0l dohc skyactiv-g engine', 0.91871), ('fuel efficient 1.5l dohc 16v skyactiv-g engine', 0.8615706), ('powerful and responsive 2.0l 4 cylinder inline dohc skyactiv-g engine', 0.8556711), ('powerful 1.5l dohc engine', 0.85540956), ('1.6l dohc engine', 0.85230136), ('reliable 1.5l 4 cylinders dohc skyactiv-g engine', 0.818362), ('reliable 1.5l dohc vvti engine', 0.80469984), ('2.0l dohc engine', 0.8010676)]}
+{'2.0l dohc 16v d-4st turbocharged dual vvt-iw engine': [('1.6l dohc 16v dual vvt engine', 0.88212615), ('powerful and fuel efficient 1.8l dohc dual vvt-i engine', 0.8722811), ('2.4l dohc vvt-i engine', 0.870402), ('2.5l dohc vvt-i engine', 0.8603676), ('dohc dual vvti-1.6l engine', 0.8443497), ('2.4l powerful and reliable dohc vvt-i engine', 0.84238017), ('2.4l dohc vvti engine', 0.82677335), ('powerful and fuel efficient 1.6l dohc vvt engine', 0.81845164), ('1.5l dohc dual vvt-i engine with electric hybrid motors', 0.8182623), ('fuel-efficient 1.5l dohc 16v vvt-ie engine', 0.8139078), ('2.4l dohc 16v cvvt engine', 0.81331664), ('powerful 2.0l turbocharged vvt-i engine', 0.81302017), ('powerful 2.4l dohc vvti engine producing 158bhp', 0.81154174), ('1.8l powerful and reliable dohc vvt-i engine', 0.8115303), ('1.2l dohc turbocharged 113bhp engine', 0.8114344), ('1.8l dohc with dual vvt-i valvematic engine', 0.8083872), ('2.5l 4 cylinder inline dohc vvti engine', 0.80257577)]}
+{'2.0l inline 4 turbo': [('powered by 2.0l inline-4 turbo engine', 0.8950598), ('powered by an inline 4 turbocharged 1', 0.84412175), ('1.6l turbo', 0.81676805), ('2l turbo charged inline 4 cylinder', 0.81657916), ('4 cylinder inline turbocharged', 0.809764), ('1.8l inline 4 turbocharged delivering 201bhp', 0.8019309)]}
+{'powerful and fuel efficient 1.5l 4 cylinder dohc i-vtec': [('powerful and fuel efficient 1.5l 4 cylinders dohc i-vtec', 0.9328416), ('1.6l powerful and reliable i-vtec 4 cylinder dohc engine', 0.93019074), ('powerful and fuel efficient 1.5l dohc i-vtec engine', 0.927542), ('2.4l 4 cylinder dohc i-vtec engine', 0.91493744), ('1.5l 4 cylinder inline dohc i-vtec engine', 0.8922931), ('fuel-efficient 1.5l inline 4 cylinders dohc 16v i-vtec engine', 0.8905504), ('powerful 1.5l inline 4 cylinders dohc i-vtec engine', 0.8895768), ('reliable 1.5l 4 cylinders 16v dohc i-vtec engine', 0.8891027), ('reliable 1.5l 4 cylinders inline dohc i-vtec engine', 0.87706995), ('1.6l four cylinder sohc i-vtec engine', 0.8712336), ('powerful and fuel efficient 1.5l petrol hybrid 4 cylinder in-line dohc i-vtec engine', 0.86867386), ('2.4l dohc i-vtec engine', 0.86858475), ('4 cylinder inline dohc i-vtec engine', 0.8682551), ('1.5l dohc i-vtec engine', 0.86785305), ('1.5l 4 cylinders inline dohc i-vtec engine', 0.86580276), ('powered by 4 cylinders inline dohc i-vtec engine', 0.8637285), ('powerful & reliable 2.4l 4 cylinder inline 16v dohc i-vtec engine producing 187bhp', 0.8633054), ('4 cylinder inline dohc i-vtec engine producing 129bhp', 0.86003983), ('1.5l inline-4 cylinders dohc i-vtec engine', 0.85834765), ('1.5l inline 4 cylinders dohc i-vtec engine', 0.85425377), ('1.5l inline 4 dohc i-vtec engine', 0.8536324)]}
+{'6.75l v12 powerplant': [('powerful 6.6l v12 engine producing 563bhp', 0.75429016), ('powered by a 6.0l v12 engine that generates 670 bhp at 8', 0.73948455)]}
+{'dynamic drive selector - eco pro/normal/sports mode': [('dynamic drive with eco/normal/sports mode', 0.8916346), ('drive mode with eco/sport', 0.85301733)]}
+{'4 x disc brakes': [('4 disc brakes', 0.9557145), ('4x disc brake', 0.9116495), ('four discs brakes', 0.90009815), ('disc brakes', 0.8937108)]}
+{'lexus 3.5l v6 engine': []}
+{'immobiliser': []}
+{'panoramic roof': []}
+{'earthdreams cvt auto': []}
+{'top speed 250 km/h': [('top speed: 250 km/h', 0.9753167), ('top speed 250km/h.', 0.9693866), ('top speed 240 km/h', 0.96401227), ('top speed 200 km/h', 0.9640066), ('top speed 200km/h', 0.9517012), ('top speed 320km/h', 0.9495725), ('top speed 180 km/h', 0.949195), ('top speed 300km/h', 0.948004), ('top speed 212 km/h', 0.9428483), ('top speed of 240 km/h', 0.9423102), ('top speed 225km/h', 0.9375435), ('top speed 254km/h', 0.93365395), ('top speed 304km/h', 0.9285317), ('top speed 235km/h', 0.92411304), ('top speed 208km/h', 0.91806716)]}
+{'7 speed m-dct with drivelogic': [('7 speed dct', 0.83089906), ('7-speed dct auto', 0.8233495)]}
+{'2.0l 4 cylinder inline 16 valve turbocharged engine which is a mercedes engine which guarantees easy maintenance': [('3l 4 cylinder 16 valves turbocharged diesel engine', 0.84485406), ('1.4l 4 cylinders inline 16 valve turbocharged engine', 0.8310253), ('2.0l four cylinder in-line 16 valve turbo charged engine', 0.82086045), ('1.6l 4 cylinders inline 16-valve turbocharged engine', 0.8197739), ('1.2l 4 cylinders 16 valves turbocharged engine', 0.81760764), ('powerful 1.2l 4 cylinders 16 valves turbocharged engine', 0.8167477), ('2.0l 4 cylinder inline 16 valve turbcharged engine', 0.8162766), ('powered by 4 cylinders inline 16 valve turbocharged engine producing 150 hp', 0.80549073)]}
+{'m-drive': []}
+{'soft close door': [('soft closing doors', 0.8827875)]}
+{'acceleration 8.3s 0-100km/h': [('acceleration 9.4s', 0.85981286), ('acceleration 9.1s', 0.85775614), ('acceleration 8.6s', 0.8561942)]}
+{'spacious interior': []}
+{'328bhp': [('315bhp', 0.8463364), ('384bhp', 0.8376609), ('227bhp', 0.8227609), ('258bhp', 0.81662035), ('453bhp', 0.81503814), ('154bhp', 0.81492007), ('201bhp', 0.8057373), ('237bhp', 0.79996735), ('362bhp', 0.79913765)]}
+{'with abs brake and airbags': [('airbags and abs', 0.86799383), ('abs airbags', 0.8632757), ('abs/srs airbags', 0.8567501)]}
+{'2.5l 6-cylinder na n52 engine pumping 204bhp/250nm': [('2.0-litre engine that produces 245bhp & 365nm torque', 0.77867854), ('flat 6 twin turbocharged engine with 7 speed pdk producing 414 bhp and 500nm torque', 0.7502021), ('1.4l 4 cylinder turbocharged engine producing 148bhp and 250nm torque', 0.74871933)]}
+{'cruise control keyless entry/start/stop': [('cruise control and keyless entry.', 0.86443233)]}
+{'powerful and reliable 2.5l v6 dual vvti engine with 6-speed automatic gearbox detached with paddle shifters': [('3.8l v6 twin turbocharged engine paired with 6 speed dual clutch transmission with in built paddle shifter', 0.7753293), ('powerful dual vvti twin scroll turbocharged engine', 0.75671893), ('powerful 3.5l v6 dual vvt-i engine mated to an 6 speed automatic transmission! luxurious rear air conditioning', 0.75180566)]}
+{'apple carplay system': []}
+{'reversing camera': []}
+{'superb condition inside out! view to believe!': []}
+{'knockdown seat': []}
+{'450nm at 5600rpm': [('450nm', 0.88111603), ('520nm', 0.8744791), ('321bhp at 450nm', 0.8406913), ('340bhp at 500nm', 0.81558657), ('400nm', 0.81336516)]}
+{'auto engine start/stop function': [('auto start/stop function', 0.8296248)]}
+{'122bhp': [('124bhp', 0.8840412), ('138bhp', 0.8679268), ('142bhp', 0.8576699), ('118bhp', 0.8562034), ('129bhp', 0.8461596), ('113bhp', 0.8411983), ('114bhp', 0.84093636), ('147bhp', 0.8365997), ('123bhp', 0.8343494), ('148bhp', 0.8313346), ('134bhp', 0.8213314), ('135bhp', 0.81110257)]}
+{'1.5l 6 speed manual': [('5 speed manual', 0.88885146)]}
+{'manual transmission.': [('transmission', 0.8273967), ('auto transmission', 0.7983341)]}
+{'audio control': []}
+{'3 year warranty.': [('5 years warranty', 0.8855795), ('agent warranty till apr 2023.', 0.7757885), ('under warranty', 0.7712801), ('thereafter 1 year select approved warranty', 0.7685504), ('agent warranty till jan 2024', 0.75219846)]}
+{'inline 4 cylinders': [('1.6l inline 4 cylinders', 0.94816), ('3l 6 cylinders inline', 0.9171792)]}
+{'7 seater': []}
+{'auto parking brake': [('electronic parking brake', 0.88974243), ('electronic parking brakes', 0.8709818)]}
+{'abs and traction control': [('traction control.', 0.8544313), ('traction control', 0.84472847)]}
+{'smooth 6 speed automatic gearbox with manual shifters': [('6 speed automatic gearbox', 0.9191389), ('smooth auto gearbox', 0.8997054), ('7 speed automatic gearbox', 0.8930805), ('6 speed manual gearbox', 0.884644), ('6 speed auto gearbox with manual select', 0.8756898), ('smooth gearbox', 0.86274695), ('6 speed gearbox', 0.844487), ('paired to a 6-speed auto activematic gearbox', 0.84435785), ('4 speed auto gearbox', 0.836477), ('5 speed auto transmission gearbox', 0.83136636), ('smooth 4 speed steptronic gearbox', 0.8109452), ('paired to a 7 speed gearbox', 0.80186695), ('paired to an 8-speed gearbox', 0.7965386)]}
+{'cvt automatic': [('cvt auto', 0.8887741), ('cvt automatic with steptronic', 0.8555584), ('super cvt-i automatic', 0.8540371)]}
+{'eco/pro/comfort/sport modes': [('eco pro/comfort/sport', 0.90971357), ('eco pro/comfort/sports/sports plus mode', 0.89778554), ('sports/comfort/eco pro mode selection', 0.8693068)]}
+{'new paint work': [('new paint', 0.95736814)]}
+{'6 speed multitronic transmission': [('8 speed multitronic transmission', 0.9640565), ('8 speed steptronic transmission', 0.895616), ('4 speed auto transmission with steptronic', 0.87435484), ('8-speed steptronic transmission.', 0.86678445), ('7g tritronic auto transmission', 0.84803027), ('smooth 6 speed auto transmission with steptronic', 0.84636676), ('steptronic transmission with double clutch 7 speed', 0.8352561), ('8 speed tiptronic transmission', 0.8299151)]}
+{'all wheel drive producing 325bhp and 450nm torque': []}
+{'auto climate controls': [('dual auto climate control', 0.9280296), ('climate control', 0.85136956)]}
+{'paddle shifters and keyless ignition': [('keyless ignition', 0.7818512), ('keyless entry and ignition', 0.7418202), ('keyless entry / ignition', 0.7343739)]}
+{'8 times free servicing': [('3 times free servicing', 0.94913024)]}
+{'sport': []}
+{'sunroof': [('sunroof.', 0.9731991), ('panoramic sunroof', 0.89192337)]}
+{'cruise and traction control': [('cruise/traction control', 0.98462474), ('traction/cruise control', 0.97091115), ('traction/cruise controls', 0.9298417), ('stability/traction/cruise control', 0.9125305), ('steering/cruise control', 0.8333571), ('steering/ cruise control', 0.8333571), ('cruise/steering control', 0.8332755), ('cruise control with brake function', 0.8102694), ('multi-function steering with cruise control', 0.7908965), ('steering/climate/cruise control', 0.7899458)]}
+{'296bhp v6 engine': [('3.6 v6 engine producing 402bhp', 0.85507494), ('v8 engine produces 399bhp', 0.81092364), ('3.2l natural aspirated v6 engine producing 250bhp', 0.8076408), ('powerful 3.5l v6 dual vvt-i engine producing 276bhp', 0.77315354), ('3.5l v6 engine producing 301 bhp', 0.77160525), ('3.0l v6 supercharged/hybrid engine developing 328bhp at maximum torque of 450nm', 0.75969326)]}
+{'7g-dct transmission producing 161bhp': [('7g-dct  transmission', 0.91337407), ('7g-dct transmission', 0.91337407), ('transmission 7g-dct', 0.8968018), ('transmission 7 speed  dct', 0.88017046)]}
+{'20.2km/l fuel consumption': [('fuel consumption 20.4 km/l', 0.937904), ('14.4km/l fuel consumption', 0.9286228), ('fuel consumption 19.2km/l', 0.92861265), ('fuel consumption 14.3km/l', 0.89776295), ('fuel consumption of 21.7km/l', 0.88804907), ('23km/l fuel consumption', 0.8843574), ('fuel consumption 15.6km/l', 0.87943166), ('fuel efficiency at 20.4km/l', 0.8736248), ('achievable fuel consumption combined 2.5l/100km', 0.8715997), ('fuel consumption at 15.8km/l', 0.8482188), ('fuel consumption of 11.4 km/l', 0.83579487)]}
+{'7 seater mpv': []}
+{'come with honda sensing': [('honda sensing', 0.94511)]}
+{'8 speed auto with ecopro/comfort/sport mode': [('6 speed auto with sports/eco mode', 0.8582585)]}
+{'earth dreams cvt transmission': [('earth dreams cvt transmission with eco mode', 0.8999134)]}
+{'8 speed zf paddle-shift': [('6 speed auto with paddle shift', 0.8079066), ('9g-tronic auto/paddle shift', 0.77967787)]}
+{'responsive': []}
+{'safety sensing': []}
+{'start/stop': [('automatic start/stop', 0.8294726)]}
+{'super fuel efficiency': [('high fuel efficiency', 0.8866627), ('fuel efficiency', 0.8568256)]}
+{'in-line dohc twin-scroll turbocharged': [('2.0l twin scroll turbocharged engine', 0.78810734), ('1.5l inline-4 twin scroll turbocharged engine', 0.74293584)]}
+{'0-100 in 4.1s': [('0-100 in 3.9s', 0.91736317), ('0-100 in 6.8s', 0.9115983)]}
+{'1.5cc hybrid engine coupled with cvt gearbox': [('cvt auto gearbox', 0.78415656), ('cvt gearbox', 0.77441424), ('1.6l dual cvvt engine', 0.77000886)]}
+{'responsive 1.3 i-vetc sohc engine': [('reliable and responsive 1.5l dohc engine', 0.81641024)]}
+{'7.1s': [('7.3s', 0.87532914), ('5.1s', 0.8561806), ('8.5s', 0.7822107)]}
+{'efficient': []}
+{'fuel efficient 1.2l 3-cylinder in-line 12-valve dohc mivec engine producing 79 bhp': [('79 bhp 1.2l 3-cylinder inline 12 valve dohc mivec engine', 0.9006178), ('powerful 2.4l 4 cylinder in-line 16-valve dohc mivec engine', 0.87190115), ('4 cylinder 16 valve dohc mivec engine producing 115bhp', 0.8630195), ('reliable 3-cylinder in line 12 valve dohc mivec engine', 0.8495086), ('fuel efficient 1.2l dohc 12 valves mivec engine', 0.8404506), ('1.2l fuel efficient dohc mivec engine', 0.834334)]}
+{'push start and rear aircon': [('rear aircon', 0.8141588)]}
+{'cam/auto headlight': [('auto headlight', 0.8727393)]}
+{'290nm': [('270nm', 0.81757903), ('181bhp at 290nm', 0.81623304)]}
+{'4 wheel drive': [('four wheel drive', 0.9584222), ('two wheel drive and 4 x 4 drive option available', 0.85804045), ('4matic all wheel drive', 0.84984875), ('all wheel drive', 0.8070347), ('rear-wheel drive', 0.80171025), ('all drive wheel', 0.79985714), ('rear wheel drive', 0.7981924)]}
+{'spacious cabin with huge boot capacity of 448l!': []}
+{'1.8l i-vtec': [('1.5l dohc i-vtec', 0.8478388), ('1.6l i-vtec engine', 0.8193457)]}
+{'original leather seats': [('leather seats', 0.9412031), ('original condition with black leather seats', 0.90279776)]}
+{'zf8 speed transmission': [('8 speed zf transmission', 0.9668791)]}
+{'day running lights': [('led daytime running lights', 0.80224025)]}
+{'keyless start/stop push button': [('push start/stop button', 0.8785924)]}
+{'8 speed with jaguar sequential shift.': []}
+{'8 speeds transmission.': [('8-speed transmission', 0.92478997), ('8 speed auto transmission', 0.87020576), ('6 speeds auto transmission', 0.8311631), ('8 speeds', 0.8265549), ('6 speed transmission', 0.8222944)]}
+{'70l fuel tank': [('65l fuel tank', 0.9320607), ('50l fuel tank', 0.8661776), ('72l fuel capacity', 0.8196557)]}
+{'3 drive mode select system': [('drive select mode', 0.88032764)]}
+{'lane departure alert/pre-crash system': []}
+{'405 lb-ft at 2': []}
+{'this engine produces a maximum power of 190 ps  at 4200 rpm and a maximum torque of 320 nm  at 1450 rpm': []}
+{'multi control steering wheel': [('multi steering wheel', 0.9448487), ('multi-function steering wheel', 0.9260206), ('multi function steering wheel', 0.92131567), ('multifunction steering wheel', 0.9003437), ('multi control steering', 0.89665204), ('multi steering control', 0.8958583), ('multi control steering wheel with paddle shift', 0.88316673)]}
+{'7 s-tronic': [('9g-tronic', 0.832971), ('7 speed  s-tronic', 0.82398206)]}
+{'factory gps': []}
+{'2.0 boxer engine': [('2.0l boxer engine', 0.9733386), ('2l boxer engine', 0.9240899)]}
+{'rear wheel drive with drive mode selector': []}
+{'f1 6 speed semi-automatic sequential manuel transmission': [('6 speed automatic transmission', 0.7988324), ('4 speed automatic transmission', 0.78154504)]}
+{'7 speed dsg': [('7-speed  dsg', 0.9855398), ('6 speed dsg auto', 0.91111964), ('7-speed auto dsg', 0.90415615), ('7 speed  dsg transmission', 0.88554883)]}
+{'fog lamps': [('fog lamp', 0.91904783)]}
+{'4wd': [('2wd', 0.84091365)]}
+{'capable of 700km on 1 full tank': []}
+{'parking sensor': [('parking camera and sensors', 0.8549591)]}
+{'made in japan': []}
+{'auto rear roller blinds': [('rear side windows blinds', 0.7338096)]}
+{'earth dream technology': [('earth dreams cvt technology', 0.85258543)]}
+{'rain sensor': [('rain sensors', 0.9866637), ('auto rain sensors', 0.91202515), ('rain sensing', 0.8897413), ('auto light and rain sensors', 0.8377914)]}
+{'amg dynamic select': [('dynamic select', 0.8012261)]}
+{'hybrid': []}
+{'s-tronic dual clutch transmission': [('7 speed dual clutch transmission', 0.8286736), ('seven speed dual clutch transmission.', 0.8029586)]}
+{'both electric seats': [('electric seats', 0.918472), ('electrical seats and more!', 0.82419467), ('electrical seats with memory', 0.79669046)]}
+{'multi function steering with paddle shift': [('multifunction steering wheel with paddle shifts', 0.87463504), ('multi-function steering', 0.8370698), ('multi function steering', 0.8216198)]}
+{'comfort+': [('comfort', 0.9389673)]}
+{'responsive and efficient 1.4l turbocharged engine paired 7-speed dsg auto transmission producing 120bhp': [('powered by 1.2l turbocharged engine mated with 7 speeds dsg transmission', 0.8518621), ('powerful 2.0l turbocharged engine mated with 6 speed dsg gearbox', 0.8232636), ('2.0l turbocharged 250bhp engine matched with 8 speed automatic transmission', 0.80325484), ('efficient 1.4l tsi engine with responsive 7 speed dsg transmission', 0.80073357), ("inline 4 turbocharged 2l engine delivering 241bhp and 350nm of torque mated to 8 spd 'direct-shift' automatic transmission", 0.7847075), ('powerful and reliable 2.0l twin power turbocharged engine with silky smooth 8-speed auto transmission', 0.7655584)]}
+{'sports or sports+.': []}
+{'pre collision alert': [('collision warning', 0.81987196)]}
+{'powerful and responsive 2.0l tfsi engine': [('powerful and fuel efficient turbo charged 2.0l tfsi engine', 0.8218593)]}
+{'white exterior with black interior': [('grey exterior with black interior', 0.85274875), ('blue exterior with black interior', 0.7473677)]}
+{'reliable 3.6l v6 engine tiptronic gearbox producing 295 bhp/400 nm torque': [('8-speed tiptronic s gearbox', 0.80610794), ('8 speed tiptronic gearbox all wheel drive', 0.7567974)]}
+{'bi-xenon headlights/drl': []}
+{'terrain response': []}
+{'tri-zone independent climate control': []}
+{'fwd abs': []}
+{'fuel savings 1.5 16v dohc petrol electric hybrid engine': [('1.8l dohc 16v vvt-i petrol electric hybrid engine', 0.8535348)]}
+{'immobilized key': [('immobilizer remote key', 0.8118115)]}
+{'srs airbags/traction control': [('srs steering airbags', 0.8741944), ('srs airbags', 0.8330012)]}
+{'amg 18" rims': [('19" rims', 0.8021936)]}
+{'powerful and responsive 1.8l cgi engine': [('powerful and responsive engine', 0.77483374)]}
+{'orange led interiorlights': [('adaptive led lights.', 0.7472683)]}
+{'6 speed auto with steptronic': [('5 speed automatic with steptronic', 0.9331803), ('8 speed steptronic', 0.89339477), ('8 speed  steptronic', 0.89339477), ('8-speed  steptronic', 0.8926931)]}
+{'1.8l 16 valves i-vtec engine': [('powerful 1.8l 16 valve i-vtec engine', 0.9394237), ('1.5l 16 valves i-vtec engine producing 108bhp', 0.85817677), ('16 valves dohc i-vtec engine with smooth earth dream cvt auto transmission', 0.8463509), ('4 cylinders inline 16 valves sohc i-vtec', 0.81665283), ('2.4l i-vtec engine', 0.8118545)]}
+{'dual cvvt engine producing 127bhp': [('1.6 dual cvvt engine', 0.8434618), ('powerful and fuel efficient 1.6l dohc dual cvvt engine', 0.78719276)]}
+{'lane departure assist': [('lane assist and depart alert', 0.8821435)]}
+{'auto headlamp': [('auto headlamps', 0.9591989)]}
+{'navigation system': []}
+{'idrive with bluetooth': []}
+{'engine push start': [('push start engine', 0.97114277)]}
+{'keyless engine start': []}
+{'electric tailgate': [('power tailgate', 0.90355057)]}
+{'adaptive brake with hold': [('brake hold', 0.87452805), ('brake hold.', 0.8476554)]}
+{'hard top convertible': []}
+{'reputable 1.8l dohc vtec engine! smooth automatic transmission gearbox! abs! eps! dual srs airbags': []}
+{'16 valves producing 160bhp': [('16 valves producing 163bhp', 0.97290665)]}
+{'2 x electric sliding doors': [('dual powered sliding doors.', 0.8794152), ('dual power sliding doors', 0.86937374), ('dual side auto sliding doors', 0.85675913), ('twin power sliding doors', 0.8535436)]}
+{"lamborghini's 4.0l twin-turbocharged v8 engine": [('4.4l v8 twin-turbocharged engine with 547bhp', 0.8038925)]}
+{'coupled to rwd': [('rwd', 0.81417954)]}
+{'250 rpm': [('500 rpm', 0.93092704)]}
+{'4 speed': [('6 speed', 0.87323606)]}
+{'performs well and is extremely reliable and affordable! the perfect sedan for you': []}
+{'rear aircon blower': [('original rear aircon', 0.76923954)]}
+{'smooth and responsive 1.8l kompressor engine': []}
+{'cvt-i auto with 3 drive mode': [('cvt auto with paddle shift/si-drive', 0.7768548)]}
+{'remote keys': []}
+{'6 speed skyactiv drive auto transmission': []}
+{'12 inch android player': []}
+{'30km/l': [('20.8km/l', 0.8330377)]}
+{'8 speed geartronic for superb fuel efficiency': []}
+{'1.3l earth dreams i-vtec engine': [('reliable 1.5l earth dreams i-vtec engine', 0.95222837)]}
+{'1.0 3 cylinder tsi engine producing 93bhp 7 speed auto transmission': [('1.0l 3-cylinder 12-valve tsi turbocharged engine producing 108bhp', 0.8280657), ('1.0l turbocharged tsi engine at 108bhp and 200nm of torque', 0.81372654), ('1.5l turbocharged tsi engine with cylinder deactivation technology', 0.78077275)]}
+{'dual airbags': [('6 x dual stage airbags', 0.9093353), ('2 x airbags', 0.9023667), ('airbags', 0.8862172)]}
+{'x-tronic cvt auto': [('x-tronic cvt transmission', 0.80818987)]}
+{'multi-function steering/climate aircon control': [('multi function steering/climate/cruise control', 0.7888498)]}
+{'7" intellilink touchscreen infotainment with aa': []}
+{'2.5l petrol-electric': [('petrol-electric', 0.89402264)]}
+{'smooth invecs-iii cvt auto': [('smooth invecs-iii cvt', 0.93359065), ('6 speed auto invecs-iii cvt', 0.8360498)]}
+{'1 careful owner': []}
+{'fully electric with 41kwh battery': []}
+{'sports/eco function': [('sports/eco mode', 0.86478597)]}
+{'rugged good looks': []}
+{'sports rim': []}
+{'led drl': [('led drl headlamp', 0.81109726)]}
+{'1.8l turbo 7g-tronic': []}
+{'8 speed  tip tronic': []}
+{'good fuel consumption and powerful as compare to gs350': []}
+{'awd': [('awd.', 0.93805283)]}
+{'4 cylinder inline 16 valve twinpower turbocharged with 8 speed transmission producing 241 bhp amd 250 nm torque': [('2.0l 4 cylinder inline 16-valve turbocharged engine producing 187 bhp', 0.8385288), ('responsive 1.2l 4 cylinder inline 16 valve tsi engine producing 88bhp with an astonishing 180 torque', 0.83704925), ('4 cylinder inline 16-valve turbocharged engine producing 207bhp', 0.826177), ('1.6l 4 cylinder inline 16 valve turbocharged engine producing 120bhp mated to a 7g-dct auto transmission', 0.82545894), ('4 cylinders inline 16 valve twin power turbocharged', 0.8114275), ('powerful 2.0l inline 4 cylinder turbocharged engine producing 248bhp & max torque of 350nm', 0.7972442), ('4 cylinder inline 16 valve tsi turbocharged', 0.7971963)]}
+{'xtronic cvt': [('xtronic cvt transmission with steptronic', 0.8753304)]}
+{'high trade-in': []}
+{'memory': []}
+{'3.0l v6 biturbo engine': [('powered by a hand built 4.0l biturbo v8 engine', 0.7933203)]}
+{'8 spd dct': []}
+{'automatic halogen head light': []}
+{'view s': []}
+{'keyless system': [('smart keyless system', 0.92458135)]}
+{'elect park brake': []}
+{'6 speed r-tronic gearbox coupled to the legendary quattro system': [('7 speed s-tronic gearbox', 0.8107367)]}
+{'amg performance suspension': []}
+{'207bhp': [('241bhp', 0.7829758)]}
+{'the engine and body at very excellent condition': []}
+{'driver electric seat': []}
+{'xenon led headlamps': [('auto xenon headlamps', 0.8934835), ('bi-xenon headlamps', 0.84230256)]}
+{'vehicle well maintained': []}
+{'best selling japanese 14ft lorry! easy to maintain': []}
+{'6 speed s tronic transmission producing 230 bhp & 370 nm of torque': [('producing 194 bhp & 300 nm of torque', 0.7568381)]}
+{'smart key entry system': [('smart key system', 0.9151448)]}
+{'eco function & eco assist': [('eco assist', 0.9208685)]}
+{'dynamic drive': [('dynamic drive mode', 0.88423073)]}
+{'standard factory fitted item': []}
+{'1.4l twin charged engine': [('1.4l twincharged engine', 0.8895749)]}
+{'eco start/stop': []}
+{'powerful 2.2l turbocharged diesel engine producing 197 bhp': [('2.2l turbocharged diesel engine', 0.8891011), ('powerful turbocharged diesel engine', 0.86192405), ('3.0 litre inline 6 cylinder tri-turbo diesel engine producing 381 bhp and massive 546lb ft of torque', 0.8213443)]}
+{'3 cylinder turbocharged engine producing 113bhp! 200nm torque! 7 speed s-tronic gearbox! 20.8km/l fuel consumption! many more!': []}
+{'gt line high performance dampers': []}
+{'blue efficiency 1.6l inline 4 supercharged engine producing 154bhp': [('1.6l inline 4 engine producing 126bhp', 0.7710428)]}
+{'paddle shifters.': []}
+{'producing 250 nm': []}
+{'w12 6.0l twin turbocharged': [('2.0l 4-cylinder in-line twinpower turbocharged', 0.7824823)]}
+{'moonroof': []}
+{'memory seats': []}
+{'bmw i-drive': []}
+{'punchy 4 cyl in-line 148 bhp turbo charged engine': []}
+{'isofix.': []}
+{'srs': []}
