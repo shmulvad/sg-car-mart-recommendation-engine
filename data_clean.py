@@ -6,8 +6,7 @@
 
 import pandas as pd
 import numpy as np
-
-from datetime import timedelta
+from datetime import datetime
 
 
 # In[2]:
@@ -23,11 +22,13 @@ def handle_date_fields(dataF):
     df = dataF.copy()
     
     '''
-    Agglomerating a singular 'registered_date' field with all values populated.
-    Removing 'lifespan' since it has low data frequency
+    * Agglomerating a singular 'registered_date' field with all values populated.
+        - Removing 1 row with registered date in the future
+    * Removing 'lifespan' since it has low data frequency
         - ~1500 rows with 'lifespan' - 'registered_date' as 7304
         - 22 rows with 'lifespan' other than 7304 but greater (and unique)
         - Alternative approach: Set other vehicles lifespan as 7304 which is the median and most frequent entry
+    * Adding a new column for 'car_age'
     '''
     
     df.lifespan = pd.to_datetime(df.lifespan)
@@ -37,10 +38,13 @@ def handle_date_fields(dataF):
     # Fixing NaNs across original_reg_date, reg_date by adding a new column
     df["registered_date"] = df.reg_date.fillna(df.original_reg_date)
     df = df.drop(columns=['reg_date', 'original_reg_date'])
+    df = df[~(df.registered_date > datetime.now())]
     
     df = df.drop(columns=['lifespan'])
     # Alternative 
-    # df.lifespan = df.lifespan.fillna(df.registered_date + timedelta(days=7304))
+#     df.lifespan = df.lifespan.fillna(df.registered_date + pd.Timedelta(days=7304))
+    
+    df["car_age"] = datetime.now().year - df.manufactured
     
     return df
 
