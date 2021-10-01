@@ -38,13 +38,15 @@ def handle_date_fields(dataF):
     # Fixing NaNs across original_reg_date, reg_date by adding a new column
     df["registered_date"] = df.reg_date.fillna(df.original_reg_date)
     df = df.drop(columns=['reg_date', 'original_reg_date'])
-    df = df[~(df.registered_date > datetime.now())]
+    df = df.drop(df[df.registered_date > datetime.now()].index)
     
     df = df.drop(columns=['lifespan'])
     # Alternative 
 #     df.lifespan = df.lifespan.fillna(df.registered_date + pd.Timedelta(days=7304))
     
+    # Remember to remove a row with manufactured as 2925 (bad value)
     df["car_age"] = datetime.now().year - df.manufactured
+#     df = df.drop(df.car_age > 50 | df.car_age < 0)
     
     return df
 
