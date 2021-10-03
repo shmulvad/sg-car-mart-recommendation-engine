@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[45]:
 
 
 import pandas as pd
@@ -9,13 +9,13 @@ import numpy as np
 from datetime import datetime
 
 
-# In[2]:
+# In[46]:
 
 
 #original_reg_date, reg_date, lifespan, fuel_type, opc_scheme
 
 
-# In[3]:
+# In[69]:
 
 
 def handle_date_fields(dataF):
@@ -26,7 +26,7 @@ def handle_date_fields(dataF):
         - Removing 1 row with registered date in the future
     * Removing 'lifespan' since it has low data frequency
         - ~1500 rows with 'lifespan' - 'registered_date' as 7304
-        - 22 rows with 'lifespan' other than 7304 but greater (and unique)
+        - 22 rows with 'lifespan' - 'registered_date' other than 7304 but greater (and unique)
         - Alternative approach: Set other vehicles lifespan as 7304 which is the median and most frequent entry
     * Adding a new column for 'car_age'
     '''
@@ -46,12 +46,12 @@ def handle_date_fields(dataF):
     
     # Remember to remove a row with manufactured as 2925 (bad value)
     df["car_age"] = datetime.now().year - df.manufactured
-#     df = df.drop(df.car_age > 50 | df.car_age < 0)
+    df = df.drop(df[(df.car_age > 50) | (df.car_age < 0)].index)
     
     return df
 
 
-# In[4]:
+# In[70]:
 
 
 def handle_opc(dataF):
@@ -67,10 +67,81 @@ def handle_opc(dataF):
     return df
 
 
-# In[5]:
+# In[138]:
+
+
+def handle_make(dataF):
+    df = dataF.copy()
+    
+    '''
+    Upon checking it's found that ALL ROWS HAVE model
+    But not all rows have make available which can be extracted from Title
+    '''
+    
+#     title = df[df.make.isna()].title
+#     revlen = [i[0] for i in sorted(title.str.split(" "), key = lambda x: len(x), reverse=True)]
+    df.make = df.make.fillna((df.title.str.split(" ")).str[0])
+    
+    return df
+    
+    
+
+
+# In[139]:
 
 
 df = pd.read_csv("train.csv")
 df = handle_date_fields(df)
 df = handle_opc(df)
+df = handle_make(df)
+
+
+# In[ ]:
+
+
+############################## Experiment/EDA below this ################################
+
+
+# In[100]:
+
+
+tit = df.title
+revlen = sorted(tit.str.split(" "), key = lambda x: len(x), reverse=True)
+f = set([i[0] for i in revlen])
+len(f)
+
+
+# In[101]:
+
+
+## To check with similarity setup whether it's populating correctly or not.
+
+df[df.title == " ".join(revlen[0])][:3]
+
+
+# In[121]:
+
+
+tit = df[df.make.isna()].title
+revlen = sorted(tit.str.split(" "), key = lambda x: len(x), reverse=True)
+f = set([i[0] for i in revlen])
+
+
+# In[125]:
+
+
+title = df[df.make.isna()].title
+revlen = [i[0] for i in sorted(title.str.split(" "), key = lambda x: len(x), reverse=True)]
+
+
+# In[134]:
+
+
+df.make = df.make.fillna((df.title.str.split(" ")).str[0])
+
+
+# In[137]:
+
+
+df[df.make.isna()]
 
