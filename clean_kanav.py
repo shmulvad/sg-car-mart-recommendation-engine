@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import pandas as pd
 import numpy as np
 import re
@@ -12,8 +6,6 @@ from sklearn.preprocessing import MultiLabelBinarizer,OneHotEncoder
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import train_test_split
 
-
-# In[2]:
 
 
 def clean_categories(main_df):    
@@ -44,8 +36,6 @@ def clean_categories(main_df):
     
     return df
 
-
-# In[3]:
 
 
 def clean_fuel_type(full_df):
@@ -82,10 +72,6 @@ def clean_fuel_type(full_df):
     
     return df
 
-
-# In[5]:
-
-
 def get_predictor(full_df,col):
     df = full_df.copy()
     retain_columns = [col for col in df.columns if sum(df[col].isna())<2784]
@@ -108,16 +94,6 @@ def get_predictor(full_df,col):
     "To be completed according to nature of cleaned data"
     
     return reg
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
 
 
 
