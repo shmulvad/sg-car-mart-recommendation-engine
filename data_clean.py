@@ -1,21 +1,13 @@
 #!/usr/bin/env python
-# coding: utf-8
-
-# In[45]:
-
 
 import pandas as pd
 import numpy as np
 from datetime import datetime
-
-
-# In[46]:
-
-
-# original_reg_date, reg_date, lifespan, fuel_type, opc_scheme
-
-
-# In[69]:
+import httpx
+from bs4 import BeautifulSoup
+import re
+import time
+import json
 
 
 def handle_date_fields(dataF):
@@ -51,9 +43,6 @@ def handle_date_fields(dataF):
     return df
 
 
-# In[70]:
-
-
 def handle_opc(dataF):
     df = dataF.copy()
 
@@ -65,9 +54,6 @@ def handle_opc(dataF):
     df.loc[~df.opc_scheme.isin(["0"]), "opc_scheme"] = "1"
 
     return df
-
-
-# In[138]:
 
 
 def handle_make(dataF):
@@ -85,62 +71,23 @@ def handle_make(dataF):
     return df
 
 
-# In[139]:
+def handle_fuel_type(dataF):
+    df = dataF.copy()
+
+    """
+    Using extracted fueltype.csv values from WebScraping to fill na values in the dataset
+    """
+
+    with open("scraped_data/listing_id_TO_fuel_type.json", "r") as f:
+        listing_id_to_fuel_type = json.load(f)["fuel_type"]
+
+    fuel_type = df.listing_id.apply(lambda x: listing_id_to_fuel_type[str(x)])
+    df.fuel_type = df.fuel_type.fillna(fuel_type)
+    return df
 
 
-df = pd.read_csv("train.csv")
+df = pd.read_csv("data/train.csv")
 df = handle_date_fields(df)
 df = handle_opc(df)
 df = handle_make(df)
-
-
-# In[ ]:
-
-
-############################## Experiment/EDA below this ################################
-
-
-# In[100]:
-
-
-tit = df.title
-revlen = sorted(tit.str.split(" "), key=lambda x: len(x), reverse=True)
-f = set([i[0] for i in revlen])
-len(f)
-
-
-# In[101]:
-
-
-## To check with similarity setup whether it's populating correctly or not.
-
-df[df.title == " ".join(revlen[0])][:3]
-
-
-# In[121]:
-
-
-tit = df[df.make.isna()].title
-revlen = sorted(tit.str.split(" "), key=lambda x: len(x), reverse=True)
-f = set([i[0] for i in revlen])
-
-
-# In[125]:
-
-
-title = df[df.make.isna()].title
-revlen = [
-    i[0] for i in sorted(title.str.split(" "), key=lambda x: len(x), reverse=True)
-]
-
-
-# In[134]:
-
-
-df.make = df.make.fillna((df.title.str.split(" ")).str[0])
-
-
-# In[137]:
-
-
-df[df.make.isna()]
+df = handle_fuel_type(df)
