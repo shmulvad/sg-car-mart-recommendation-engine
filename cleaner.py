@@ -1,7 +1,11 @@
+from datetime import datetime
+import json
+import re
 from typing import Optional, Set
 
 import pandas as pd
 import numpy as np
+from sklearn.preprocessing import MultiLabelBinarizer
 
 import utils
 import constants as const
@@ -24,12 +28,29 @@ def set_nans_to_median(df_original: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def category_to_set(category: str) -> Set[str]:
+def handle_categories(df_original: pd.DataFrame) -> pd.DataFrame:
     """
-    Converts a category string like "parf car, premium ad car, low mileage car"
-    to a set of strings {'parf car', 'premium ad car', 'low mileage car'}
+    Converts the category column from consisting of strings to sets of strings
+    and adds new binary columns for each unique category
     """
-    return set(category.split(', '))
+    df = df_original.copy().reset_index()
+
+    def string_to_set(category: str) -> Set[str]:
+        """
+        Converts a category like "parf car, premium ad car, low mileage car"
+        to a set of strings {'parf car', 'premium ad car', 'low mileage car'}
+        """
+        return set([cat.strip().lower() for cat in category.split(',')])
+
+    df.category = df.category.apply(string_to_set)
+    mlb = MultiLabelBinarizer()
+    binary_cats = mlb.fit_transform(df.category)
+    cols = [col.replace(' ', '_') for col in mlb.classes_]
+    binary_cats_df = pd.DataFrame(binary_cats, columns=cols)
+    binary_cats_df.drop(['electric_cars', 'hybrid_cars'], axis=1, inplace=True)
+    binary_cats_df.rename(columns={'-': 'missing_category'}, inplace=True)
+
+    return pd.concat([df, binary_cats_df], axis=1)
 
 
 def vehicle_type_to_cat_num(type_of_vehicle: str) -> int:
@@ -49,6 +70,102 @@ def vehicle_type_to_cat_num(type_of_vehicle: str) -> int:
     return 0
 
 
+def handle_date_fields(df_original: pd.DataFrame) -> pd.DataFrame:
+    """
+    * Agglomerating a singular 'registered_date' field with all values populated.
+        - Removing 1 row with registered date in the future
+    * Removing 'lifespan' since it has low data frequency
+        - ~1500 rows with 'lifespan' - 'registered_date' as 7304
+        - 22 rows with 'lifespan' - 'registered_date' other than 7304 but greater (and unique)
+        - Alternative approach: Set other vehicles lifespan as 7304 which is the median and most frequent entry
+    * Adding a new column for 'car_age'
+    """
+    df = df_original.copy()
+    df.lifespan = pd.to_datetime(df.lifespan)
+    df.reg_date = pd.to_datetime(df.reg_date)
+    df.original_reg_date = pd.to_datetime(df.original_reg_date)
+
+    # Fixing NaNs across original_reg_date, reg_date by adding a new column
+    df['registered_date'] = df.reg_date.fillna(df.original_reg_date)
+    df = df.drop(columns=['reg_date', 'original_reg_date'])
+    df = df.drop(df[df.registered_date > datetime.now()].index)
+
+    df = df.drop(columns=['lifespan'])
+    # Alternative
+    # df.lifespan = df.lifespan.fillna(df.registered_date + pd.Timedelta(days=7304))
+
+    # Remember to remove a row with manufactured as 2925 (bad value)
+    df['car_age'] = datetime.now().year - df.manufactured
+    df = df.drop(df[(df.car_age > const.MAX_CAR_AGE) | (df.car_age < 0)].index)
+
+    return df
+
+
+def handle_opc(df_original: pd.DataFrame) -> pd.DataFrame:
+    """
+    Replacing NaN values with 0 denoting "Non-OPC" vehicles.
+    Replacing values with 1 denoting "OPC" vehicles
+    """
+    df = df_original.copy()
+    df.opc_scheme = df.opc_scheme.fillna("0")
+    df.loc[~df.opc_scheme.isin(["0"]), "opc_scheme"] = "1"
+    return df
+
+
+def handle_make(df_original: pd.DataFrame) -> pd.DataFrame:
+    """
+    upon checking it's found that ALL ROWS HAVE model
+    but not all rows have make available which can be extracted from Title
+    """
+    df = df_original.copy()
+    splitted_titles = df.title.apply(str.lower).str.split()
+    df.make = df.make.fillna(splitted_titles.str[0])
+    return df
+
+
+def handle_fuel_type(df_original: pd.DataFrame) -> pd.DataFrame:
+    """
+    Tries to clean fuel type based on the description and features, falling
+    back to 'petrol' for NaN values if nothing else can be found
+    """
+    df = df_original.copy()
+    split_re = re.compile(r'; |,|\*|\s|&|\|')
+
+    def helper(row: pd.Series) -> str:
+        if isinstance(row.fuel_type, str) and row.fuel_type:
+            return row.fuel_type
+
+        for val in [row.description, row.features]:
+            if not isinstance(val, str):
+                continue
+
+            found_diesel = any('diesel' in token.strip().lower()
+                               for token in split_re.split(val))
+            if found_diesel:
+                return 'diesel'
+
+        # If no fuel type is found from description or features, return petrol
+        return 'petrol'
+
+    df.fuel_type = df.apply(helper, axis=1)
+    return pd.concat([df, pd.get_dummies(df.fuel_type)], axis=1)
+
+
+def handle_fuel_type_alt(df_original: pd.DataFrame) -> pd.DataFrame:
+    """
+    Using extracted fueltype.csv values from WebScraping to fill na values in
+    the dataset
+    """
+    df = df_original.copy()
+
+    with open(const.FUEL_TYPE_PATH, 'r') as f:
+        listing_id_to_fuel_type = json.load(f)['fuel_type']
+
+    fuel_type = df.listing_id.apply(lambda x: listing_id_to_fuel_type[str(x)])
+    df.fuel_type = df.fuel_type.fillna(fuel_type)
+    return df
+
+
 def clean_preliminary(df_original: pd.DataFrame, is_test: bool = False) \
         -> pd.DataFrame:
     """
@@ -64,15 +181,23 @@ def clean_preliminary(df_original: pd.DataFrame, is_test: bool = False) \
     if not is_test:
         df = utils.remove_nan_rows(df)
 
+    chained_funcs = [
+        handle_date_fields,
+        handle_opc,
+        handle_make,
+        handle_fuel_type,
+        handle_categories
+    ]
+    for df_func in chained_funcs:
+        df = df_func(df)
+
     for str_col in const.STR_COLS:
         df[str_col] = df[str_col].apply(nan_to_str_fallback)
 
-    df['fuel_type'] = df['fuel_type'].map(const.FUEL_TYPE_MAP)
-    df['transmission'] = df['transmission'].map(const.TRANSMISSION_MAP)
-    df['type_of_vehicle'] = df['type_of_vehicle'].apply(vehicle_type_to_cat_num)
-    df['category'] = df['category'].apply(category_to_set)
+    df.transmission = df.transmission.map(const.TRANSMISSION_MAP)
+    df.type_of_vehicle = df.type_of_vehicle.apply(vehicle_type_to_cat_num)
 
     if not is_test:
-        df['price'] = df['price'].apply(round)
+        df.price = df.price.apply(round)
 
     return df

@@ -7,18 +7,24 @@ UNKNOWN_STR = 'UNKNOWN'
 MAX_NUM_NANS = 8
 NAN_PENALTY = 0.01
 
-TRAIN_PATH = Path('data/train.csv')
-TEST_PATH = Path('data/test.csv')
+MAX_CAR_AGE = 50
+
+DATA_PATH = Path('data')
+SCRAPED_PATH = Path('scraped_data')
+
+TRAIN_PATH = DATA_PATH / 'train.csv'
+TEST_PATH = DATA_PATH / 'test.csv'
 CSV_PREDS_OUT = Path('preds.csv')
 
-MOST_SIMILIAR_TRAIN_PATH = Path('data/most_similar_train.pkl')
-MOST_SIMILIAR_TEST_PATH = Path('data/most_similar_test.pkl')
+MOST_SIMILIAR_TRAIN_PATH = DATA_PATH / 'most_similar_train.pkl'
+MOST_SIMILIAR_TEST_PATH = DATA_PATH / 'most_similar_test.pkl'
+
+FUEL_TYPE_PATH = SCRAPED_PATH / 'listing_id_TO_fuel_type.json'
 
 
 COLS_TO_DROP = [
     'indicative_price',
     'eco_category',
-    'opc_scheme'
 ]
 
 CRITICAL_COLS = [
@@ -46,7 +52,6 @@ STR_COLS = [
     'model',
     'description',
     'type_of_vehicle',
-    'category',
     'fuel_type',
     'features',
     'accessories'
@@ -81,15 +86,6 @@ TO_SKIP = {
 TRANSMISSION_MAP = {
     'auto': 0,
     'manual': 1
-}
-
-
-FUEL_TYPE_MAP = {
-    'electric': 0.0,
-    'petrol-electric': 0.5,
-    UNKNOWN_STR: 0.7,  # Arbitrarily chosen value
-    'diesel': 1.0,
-    'petrol': 1.0
 }
 
 VEHICLE_CATEGORIES = [
