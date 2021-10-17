@@ -19,7 +19,8 @@ CSV_PREDS_OUT = Path('preds.csv')
 MOST_SIMILIAR_TRAIN_PATH = DATA_PATH / 'most_similar_train.pkl'
 MOST_SIMILIAR_TEST_PATH = DATA_PATH / 'most_similar_test.pkl'
 
-FUEL_TYPE_PATH = SCRAPED_PATH / 'listing_id_TO_fuel_type.json'
+FUEL_TYPE_PATH = SCRAPED_PATH / 'listing_id_to_fuel_type.json'
+USED_CARS_SIMPLIFIED_PATH = DATA_PATH / 'sg-used-cars-final-simplified.csv'
 
 
 COLS_TO_DROP = [

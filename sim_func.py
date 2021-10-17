@@ -13,7 +13,7 @@ def equality(elm1: str, elm2: str, *args) -> float:
     Returns 1.0 if two elements are exactly equal to each other, othwerwise 0.
     Suitable for i.e. strings that represent categorical values
     """
-    return 1.0 if elm1 == elm2 else 0.0
+    return float(elm1 == elm2)
 
 
 def get_sim_ratio(str1: str, str2: str, *args) -> float:
@@ -22,10 +22,8 @@ def get_sim_ratio(str1: str, str2: str, *args) -> float:
 
 
 def sim_above_threshold(str1: str, str2: str, *args, threshold=0.95) -> float:
-    """
-    Returns 1.0 if two strings are very close to each other, otherwise 0
-    """
-    return 1.0 if get_sim_ratio(str1, str2) >= threshold else 0.0
+    """Returns 1.0 if two strings are very close to each other, otherwise 0"""
+    return float(get_sim_ratio(str1, str2) >= threshold)
 
 
 def numerical_difference(num1: Number, num2: Number,
@@ -53,7 +51,7 @@ SIM_FUNCS = {
     'make': sim_above_threshold,
     'model': sim_above_threshold,
     'manufactured': numerical_difference,
-    'type_of_vehicle': sim_above_threshold,
+    'type_of_vehicle': numerical_difference,
     'category': jaccard_similarity,
     'transmission': equality,
     'curb_weight': numerical_difference,

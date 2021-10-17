@@ -10,6 +10,8 @@ from sklearn.preprocessing import MultiLabelBinarizer
 import utils
 import constants as const
 
+SPLIT_RE = re.compile(r'; |,|\*|\s|&|\|')
+
 
 def nan_to_str_fallback(value: Optional[str]) -> str:
     """
@@ -28,29 +30,12 @@ def set_nans_to_median(df_original: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def handle_categories(df_original: pd.DataFrame) -> pd.DataFrame:
+def string_to_set(category: str) -> Set[str]:
     """
-    Converts the category column from consisting of strings to sets of strings
-    and adds new binary columns for each unique category
+    Converts a category like "parf car, premium ad car, low mileage car"
+    to a set of strings {'parf car', 'premium ad car', 'low mileage car'}
     """
-    df = df_original.copy().reset_index()
-
-    def string_to_set(category: str) -> Set[str]:
-        """
-        Converts a category like "parf car, premium ad car, low mileage car"
-        to a set of strings {'parf car', 'premium ad car', 'low mileage car'}
-        """
-        return set([cat.strip().lower() for cat in category.split(',')])
-
-    df.category = df.category.apply(string_to_set)
-    mlb = MultiLabelBinarizer()
-    binary_cats = mlb.fit_transform(df.category)
-    cols = [col.replace(' ', '_') for col in mlb.classes_]
-    binary_cats_df = pd.DataFrame(binary_cats, columns=cols)
-    binary_cats_df.drop(['electric_cars', 'hybrid_cars'], axis=1, inplace=True)
-    binary_cats_df.rename(columns={'-': 'missing_category'}, inplace=True)
-
-    return pd.concat([df, binary_cats_df], axis=1)
+    return set([cat.strip().lower() for cat in category.split(',')])
 
 
 def vehicle_type_to_cat_num(type_of_vehicle: str) -> int:
@@ -70,6 +55,49 @@ def vehicle_type_to_cat_num(type_of_vehicle: str) -> int:
     return 0
 
 
+def handle_fuel_type_using_other_cols(df_original: pd.DataFrame) -> pd.DataFrame:
+    """
+    Tries to clean fuel type based on the description and features, falling
+    back to 'petrol' for NaN values if nothing else can be found
+    """
+    def helper(row: pd.Series) -> str:
+        if isinstance(row.fuel_type, str) and row.fuel_type:
+            return row.fuel_type
+
+        for val in [row.get('description'), row.get('features')]:
+            if not isinstance(val, str):
+                continue
+
+            found_diesel = any('diesel' in token.strip().lower()
+                               for token in SPLIT_RE.split(val))
+            if found_diesel:
+                return 'diesel'
+
+        # If no fuel type is found from description or features, return petrol
+        return 'petrol'
+
+    df = df_original.copy()
+    df.fuel_type = df.apply(helper, axis=1)
+    return df
+
+
+def handle_fuel_type_using_scraped_data(df_original: pd.DataFrame) -> pd.DataFrame:
+    """
+    Using extracted fueltype.csv values from WebScraping to fill na values in
+    the dataset
+    """
+    if 'fuel_type' not in df_original:
+        return df_original
+
+    with open(const.FUEL_TYPE_PATH, 'r') as f:
+        listing_id_to_fuel_type = json.load(f)['fuel_type']
+
+    df = df_original.copy()
+    fuel_type = df.listing_id.apply(lambda x: listing_id_to_fuel_type[str(x)])
+    df.fuel_type = df.fuel_type.fillna(fuel_type)
+    return df
+
+
 def handle_date_fields(df_original: pd.DataFrame) -> pd.DataFrame:
     """
     * Agglomerating a singular 'registered_date' field with all values populated.
@@ -80,6 +108,10 @@ def handle_date_fields(df_original: pd.DataFrame) -> pd.DataFrame:
         - Alternative approach: Set other vehicles lifespan as 7304 which is the median and most frequent entry
     * Adding a new column for 'car_age'
     """
+    cols = ['reg_date', 'lifespan', 'original_reg_date']
+    if not all(col in df_original for col in cols):
+        return df_original
+
     df = df_original.copy()
     df.lifespan = pd.to_datetime(df.lifespan)
     df.reg_date = pd.to_datetime(df.reg_date)
@@ -106,9 +138,12 @@ def handle_opc(df_original: pd.DataFrame) -> pd.DataFrame:
     Replacing NaN values with 0 denoting "Non-OPC" vehicles.
     Replacing values with 1 denoting "OPC" vehicles
     """
+    if 'opc_scheme' not in df_original:
+        return df_original
+
     df = df_original.copy()
-    df.opc_scheme = df.opc_scheme.fillna("0")
-    df.loc[~df.opc_scheme.isin(["0"]), "opc_scheme"] = "1"
+    df.opc_scheme = df.opc_scheme.fillna('0')
+    df.loc[~df.opc_scheme.isin(['0']), 'opc_scheme'] = '1'
     return df
 
 
@@ -117,56 +152,17 @@ def handle_make(df_original: pd.DataFrame) -> pd.DataFrame:
     upon checking it's found that ALL ROWS HAVE model
     but not all rows have make available which can be extracted from Title
     """
+    if 'title' not in df_original or 'make' not in df_original:
+        return df_original
+
     df = df_original.copy()
     splitted_titles = df.title.apply(str.lower).str.split()
     df.make = df.make.fillna(splitted_titles.str[0])
     return df
 
 
-def handle_fuel_type(df_original: pd.DataFrame) -> pd.DataFrame:
-    """
-    Tries to clean fuel type based on the description and features, falling
-    back to 'petrol' for NaN values if nothing else can be found
-    """
-    df = df_original.copy()
-    split_re = re.compile(r'; |,|\*|\s|&|\|')
-
-    def helper(row: pd.Series) -> str:
-        if isinstance(row.fuel_type, str) and row.fuel_type:
-            return row.fuel_type
-
-        for val in [row.description, row.features]:
-            if not isinstance(val, str):
-                continue
-
-            found_diesel = any('diesel' in token.strip().lower()
-                               for token in split_re.split(val))
-            if found_diesel:
-                return 'diesel'
-
-        # If no fuel type is found from description or features, return petrol
-        return 'petrol'
-
-    df.fuel_type = df.apply(helper, axis=1)
-    return pd.concat([df, pd.get_dummies(df.fuel_type)], axis=1)
-
-
-def handle_fuel_type_alt(df_original: pd.DataFrame) -> pd.DataFrame:
-    """
-    Using extracted fueltype.csv values from WebScraping to fill na values in
-    the dataset
-    """
-    df = df_original.copy()
-
-    with open(const.FUEL_TYPE_PATH, 'r') as f:
-        listing_id_to_fuel_type = json.load(f)['fuel_type']
-
-    fuel_type = df.listing_id.apply(lambda x: listing_id_to_fuel_type[str(x)])
-    df.fuel_type = df.fuel_type.fillna(fuel_type)
-    return df
-
-
-def clean_preliminary(df_original: pd.DataFrame, is_test: bool = False) \
+def clean_preliminary(df_original: pd.DataFrame, is_test: bool = False,
+                      clean_fuel_type_with_scraped: bool = False) \
         -> pd.DataFrame:
     """
     Runs the preliminary cleaning on the df before we start finding
@@ -181,23 +177,51 @@ def clean_preliminary(df_original: pd.DataFrame, is_test: bool = False) \
     if not is_test:
         df = utils.remove_nan_rows(df)
 
-    chained_funcs = [
-        handle_date_fields,
-        handle_opc,
-        handle_make,
-        handle_fuel_type,
-        handle_categories
-    ]
-    for df_func in chained_funcs:
+    for df_func in [handle_date_fields, handle_opc, handle_make]:
         df = df_func(df)
 
-    for str_col in const.STR_COLS:
+    intersect_cols = set(df.columns) & set(const.STR_COLS)
+    for str_col in intersect_cols:
         df[str_col] = df[str_col].apply(nan_to_str_fallback)
 
-    df.transmission = df.transmission.map(const.TRANSMISSION_MAP)
-    df.type_of_vehicle = df.type_of_vehicle.apply(vehicle_type_to_cat_num)
+    if 'transmission' in df:
+        df.transmission = df.transmission.map(const.TRANSMISSION_MAP)
 
-    if not is_test:
+    if 'type_of_vehicle' in df:
+        df.type_of_vehicle = df.type_of_vehicle.apply(vehicle_type_to_cat_num)
+
+    if 'category' in df:
+        df.category = df.category.apply(string_to_set)
+
+    if 'fuel_type' in df:
+        fuel_func = (handle_fuel_type_using_scraped_data
+                     if clean_fuel_type_with_scraped
+                     else handle_fuel_type_using_other_cols)
+        df = fuel_func(df)
+
+    if 'price' in df:
         df.price = df.price.apply(round)
 
-    return df
+    return df.reset_index()
+
+
+def to_categorical_for_cols(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Converts all relevant columns to categorical / one-hot encoded
+    """
+    # Fuel type
+    fuel_type_dummies = pd.get_dummies(df.fuel_type)
+
+    # Categories
+    mlb = MultiLabelBinarizer()
+    binary_cats = mlb.fit_transform(df.category)
+    cols = [col.replace(' ', '_') for col in mlb.classes_]
+    binary_cats_df = pd.DataFrame(binary_cats, columns=cols)
+    binary_cats_df.drop(['electric_cars', 'hybrid_cars'], axis=1, inplace=True)
+    binary_cats_df.rename(columns={'-': 'missing_category'}, inplace=True)
+
+    return pd.concat([
+        df,
+        fuel_type_dummies,
+        binary_cats_df
+    ], axis=1)

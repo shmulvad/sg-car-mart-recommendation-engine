@@ -53,7 +53,8 @@ def compute_row_similarity(row1: pd.Series, row2: pd.Series,
 
 
 def compute_similarities(main_df: pd.DataFrame, train_df: pd.DataFrame,
-                         verbose: bool = False) -> pd.DataFrame:
+                         verbose: bool = False,
+                         is_test: bool = False) -> pd.DataFrame:
     """
     Computes the similarity between the rows in the dataframe that has missing
     values in critical columns compared to all other rows in DataFrame.
@@ -66,22 +67,31 @@ def compute_similarities(main_df: pd.DataFrame, train_df: pd.DataFrame,
         def compute_similarities_for_specific_row(row_to_compare: pd.Series) -> float:
             return compute_row_similarity(row, row_to_compare, train_df)
 
-        return train_df.apply(compute_similarities_for_specific_row, axis=1)
+        apply_func = train_df.parallel_apply if is_test else train_df.apply
+        return apply_func(compute_similarities_for_specific_row, axis=1)
 
     warm_cache(train_df)
-    criticals = main_df[main_df.apply(utils.has_nan_in_critial_col, axis=1)]
-    sim_df = criticals.parallel_apply(compute_similarities_for_given_row, axis=1)
+    # If testing, there is only one row and as such it makes more sense
+    # to do the parallel computation in inner func and not here. When we clean
+    # test data, there are many rows and as such it makes more sense to do the
+    # parallel computation in the outer func.
+    if is_test:
+        sim_df = main_df.apply(compute_similarities_for_given_row, axis=1)
+    else:
+        criticals = main_df[main_df.apply(utils.has_nan_in_critial_col, axis=1)]
+        sim_df = criticals.parallel_apply(compute_similarities_for_given_row, axis=1)
     return sim_df
 
 
 def replace_nan_with_most_similar(main_df: pd.DataFrame,
                                   train_df: Optional[pd.DataFrame] = None,
                                   sim_df: Optional[pd.DataFrame] = None,
-                                  verbose: bool = False) -> pd.DataFrame:
+                                  verbose: bool = False,
+                                  is_test: bool = False) -> pd.DataFrame:
     train_df = main_df.copy() if train_df is None else train_df
     if sim_df is None:
         utils.vprint(verbose, 'Computing similarities...')
-        sim_df = compute_similarities(main_df, train_df, verbose)
+        sim_df = compute_similarities(main_df, train_df, verbose, is_test)
 
     utils.vprint(verbose, 'Getting top k most similar...')
     top_k = utils.get_top_k_most_similar(sim_df)

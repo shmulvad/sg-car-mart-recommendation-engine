@@ -29,7 +29,7 @@ def remove_nan_rows(df: pd.DataFrame, threshold=MAX_NUM_NANS) -> pd.DataFrame:
     NaN columns is above threshold
     """
     number_nans = df.apply(lambda row: sum(map(isnan, row)), axis=1)
-    return df[number_nans <= threshold]  # .reset_index(drop=True)
+    return df[number_nans <= threshold]
 
 
 def drop_bad_cols(df: pd.DataFrame) -> None:
@@ -67,7 +67,7 @@ def has_nan_in_critial_col(row: pd.Series) -> bool:
     Checks whether a row has at least one critical
     column with a NaN
     """
-    return any(isnan(row[col]) for col in CRITICAL_COLS)
+    return any(isnan(row[col]) for col in CRITICAL_COLS if col in row)
 
 
 def get_top_k_most_similar(sim_df, k=3000):
