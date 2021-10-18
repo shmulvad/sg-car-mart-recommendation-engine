@@ -71,12 +71,13 @@ def handle_fuel_type_using_other_cols(df_original: pd.DataFrame) -> pd.DataFrame
             found_petrol = any('petrol' in token.strip().lower()
                                for token in SPLIT_RE.split(val))
 
+            if found_petrol:
+                return 'petrol' 
+
             found_diesel = any('diesel' in token.strip().lower()
                                for token in SPLIT_RE.split(val))
             if found_diesel:
                 return 'diesel'
-            elif found_petrol:
-                return 'petrol' 
 
         # If no fuel type is found from description or features, return nan
         return np.nan
