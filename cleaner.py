@@ -68,13 +68,18 @@ def handle_fuel_type_using_other_cols(df_original: pd.DataFrame) -> pd.DataFrame
             if not isinstance(val, str):
                 continue
 
+            found_petrol = any('petrol' in token.strip().lower()
+                               for token in SPLIT_RE.split(val))
+
             found_diesel = any('diesel' in token.strip().lower()
                                for token in SPLIT_RE.split(val))
             if found_diesel:
                 return 'diesel'
+            elif found_petrol:
+                return 'petrol' 
 
-        # If no fuel type is found from description or features, return petrol
-        return 'petrol'
+        # If no fuel type is found from description or features, return nan
+        return np.nan
 
     df = df_original.copy()
     df.fuel_type = df.apply(helper, axis=1)
@@ -162,8 +167,9 @@ def handle_make(df_original: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def clean_preliminary(df_original: pd.DataFrame, is_test: bool = False,
-                      clean_fuel_type_with_scraped: bool = False) \
+def clean_preliminary(df_original: pd.DataFrame, is_test: bool = False
+                    #   ,clean_fuel_type_with_scraped: bool = False
+                      ) \
         -> pd.DataFrame:
     """
     Runs the preliminary cleaning on the df before we start finding
@@ -195,10 +201,12 @@ def clean_preliminary(df_original: pd.DataFrame, is_test: bool = False,
         df.category = df.category.apply(string_to_set)
 
     if 'fuel_type' in df:
-        fuel_func = (handle_fuel_type_using_scraped_data
-                     if clean_fuel_type_with_scraped
-                     else handle_fuel_type_using_other_cols)
-        df = fuel_func(df)
+        # fuel_func = (handle_fuel_type_using_scraped_data
+        #              if clean_fuel_type_with_scraped
+        #              else handle_fuel_type_using_other_cols)
+        # df = fuel_func(df)
+        df = handle_fuel_type_using_other_cols(df)
+        df = handle_fuel_type_using_scraped_data(df)
 
     if 'price' in df:
         df.price = df.price.apply(round)
