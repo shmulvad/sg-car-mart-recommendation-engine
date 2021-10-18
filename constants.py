@@ -53,7 +53,7 @@ STR_COLS = [
     'model',
     'description',
     'type_of_vehicle',
-    'fuel_type',
+#     'fuel_type', #     Since Fuel Type is being handled by function we remove it
     'features',
     'accessories'
 ]

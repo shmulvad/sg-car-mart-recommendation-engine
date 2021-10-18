@@ -144,6 +144,7 @@ def handle_opc(df_original: pd.DataFrame) -> pd.DataFrame:
     df = df_original.copy()
     df.opc_scheme = df.opc_scheme.fillna('0')
     df.loc[~df.opc_scheme.isin(['0']), 'opc_scheme'] = '1'
+    df.opc_scheme = df.opc_scheme.astype('uint8')
     return df
 
 
@@ -177,7 +178,7 @@ def clean_preliminary(df_original: pd.DataFrame, is_test: bool = False,
     if not is_test:
         df = utils.remove_nan_rows(df)
 
-    for df_func in [handle_date_fields, handle_opc, handle_make]:
+    for df_func in [handle_date_fields, handle_make]: #handle_opc, - Removed because "category" gives us opc_car as a one-hot encoded column with same data
         df = df_func(df)
 
     intersect_cols = set(df.columns) & set(const.STR_COLS)
