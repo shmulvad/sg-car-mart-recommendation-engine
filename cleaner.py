@@ -279,7 +279,7 @@ def to_categorical_for_cols(df: pd.DataFrame) -> pd.DataFrame:
     binary_cats_df.drop(["electric_cars", "hybrid_cars"], axis=1, inplace=True)
     binary_cats_df.rename(columns={"-": "missing_category"}, inplace=True)
 
-    df = df.drop(columns=["fuel_type", "category","make"])
+    df = df.drop(columns=["fuel_type", "category"])
 
     return pd.concat([df, fuel_type_dummies, binary_cats_df], axis=1)
 
