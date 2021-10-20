@@ -142,3 +142,9 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+Local_notebooks/Cleaning_1.ipynb
+.gitignore
+Local_notebooks/Regressor.ipynb
+Local_notebooks/.DS_Store
+.DS_Store
+Regressor.ipynb
