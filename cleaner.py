@@ -184,6 +184,33 @@ def handle_make(df_original: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+def handle_make_model(df_original: pd.DataFrame, replace_by_bins = False) -> pd.DataFrame:
+    """
+    Combines the make and model of the car, and assigns it an ordinal value
+    between 0-1000, according to the average price for the (make,model)
+    
+    There is also an option to replace by bin value between 0-27 if we need lesser unique values
+    """
+    df = df_original.copy()
+    splitted_titles = df.title.apply(str.lower).str.split(" |-")
+    df.make = splitted_titles.str[0]
+    df['make_model'] = df.apply(lambda x: x['make']+' '+x['model'], axis=1)
+    
+    a_file = None
+    if replace_by_bins == True:
+        a_file = open(const.MAKE_MODEL_BIN_PATH, "rb")
+    else:
+        a_file = open(const.MAKE_MODEL_DICT_MEAN_PATH, "rb")
+
+    make_dict = pickle.load(a_file)
+    a_file.close()
+    
+    df.make_model = df.make_model.map(make_dict)
+    df.make_model = df.make_model.astype("category")
+
+    return df    
+    
+
 def clean_preliminary(
     df_original: pd.DataFrame,
     is_test: bool = False
@@ -202,7 +229,9 @@ def clean_preliminary(
     if not is_test:
         df = utils.remove_nan_rows(df)
 
-    df = handle_make(df)
+    # df = handle_make(df)
+    df = handle_make_model(df) 
+
     df = handle_date_fields(df, is_test)
     #     for df_func in [handle_date_fields, handle_make]: #handle_opc, - Removed because "category" gives us opc_car as a one-hot encoded column with same data
     #         df = df_func(df, is_test)
@@ -241,6 +270,9 @@ def to_categorical_for_cols(df: pd.DataFrame) -> pd.DataFrame:
     """
     # Fuel type
     fuel_type_dummies = pd.get_dummies(df.fuel_type)
+    
+    # Model
+    make_dummies = pd.get_dummies(df.make)
 
     # Categories
     mlb = MultiLabelBinarizer()
@@ -250,9 +282,9 @@ def to_categorical_for_cols(df: pd.DataFrame) -> pd.DataFrame:
     binary_cats_df.drop(["electric_cars", "hybrid_cars"], axis=1, inplace=True)
     binary_cats_df.rename(columns={"-": "missing_category"}, inplace=True)
 
-    df = df.drop(columns=["fuel_type", "category"])
+    df = df.drop(columns=["fuel_type", "category","make"])
 
-    return pd.concat([df, fuel_type_dummies, binary_cats_df], axis=1)
+    return pd.concat([df, fuel_type_dummies, binary_cats_df,model_dummies], axis=1)
 
 
 def remove_nominal_cols(df: pd.DataFrame, cols_to_keep: list = []) -> pd.DataFrame:
