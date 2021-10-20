@@ -270,9 +270,6 @@ def to_categorical_for_cols(df: pd.DataFrame) -> pd.DataFrame:
     """
     # Fuel type
     fuel_type_dummies = pd.get_dummies(df.fuel_type)
-    
-    # Model
-    make_dummies = pd.get_dummies(df.make)
 
     # Categories
     mlb = MultiLabelBinarizer()
@@ -284,7 +281,7 @@ def to_categorical_for_cols(df: pd.DataFrame) -> pd.DataFrame:
 
     df = df.drop(columns=["fuel_type", "category","make"])
 
-    return pd.concat([df, fuel_type_dummies, binary_cats_df,model_dummies], axis=1)
+    return pd.concat([df, fuel_type_dummies, binary_cats_df], axis=1)
 
 
 def remove_nominal_cols(df: pd.DataFrame, cols_to_keep: list = []) -> pd.DataFrame:
