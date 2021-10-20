@@ -1,10 +1,10 @@
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import train_test_split
 
-from utils import rmse
+from utils import rmse, vprint
 
 
-def get_predictor(full_df, col):
+def get_predictor(full_df, col, verbose=True):
     df = full_df.copy()
     retain_columns = [col for col in df.columns if sum(df[col].isna()) < 2784]
     df = df[retain_columns]
@@ -19,7 +19,7 @@ def get_predictor(full_df, col):
     reg.fit(X_train, y_train)
 
     y_pred = reg.predict(X_test)
-    print("The Mean squared error for the predictor is: ", rmse(y_test, y_pred))
+    vprint(verbose, "The Mean squared error for the predictor is: ", rmse(y_test, y_pred))
 
     # TODO: To be completed according to nature of cleaned data
     return reg

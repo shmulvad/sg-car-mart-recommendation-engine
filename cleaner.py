@@ -1,11 +1,11 @@
 from datetime import datetime
 import json
+import pickle
 import re
 from typing import Optional, Set
 
 import pandas as pd
 import numpy as np
-import pickle
 from sklearn.preprocessing import MultiLabelBinarizer
 
 import utils
@@ -188,14 +188,14 @@ def handle_make_model(df_original: pd.DataFrame, replace_by_bins = False) -> pd.
     """
     Combines the make and model of the car, and assigns it an ordinal value
     between 0-1000, according to the average price for the (make,model)
-    
+
     There is also an option to replace by bin value between 0-27 if we need lesser unique values
     """
     df = df_original.copy()
     splitted_titles = df.title.apply(str.lower).str.split(" |-")
     df.make = splitted_titles.str[0]
     df['make_model'] = df.apply(lambda x: x['make']+' '+x['model'], axis=1)
-    
+
     a_file = None
     if replace_by_bins == True:
         a_file = open(const.MAKE_MODEL_BIN_PATH, "rb")
@@ -204,12 +204,12 @@ def handle_make_model(df_original: pd.DataFrame, replace_by_bins = False) -> pd.
 
     make_dict = pickle.load(a_file)
     a_file.close()
-    
+
     df.make_model = df.make_model.map(make_dict)
     df.make_model = df.make_model.astype("category")
 
-    return df    
-    
+    return df
+
 
 def clean_preliminary(
     df_original: pd.DataFrame,
@@ -230,7 +230,7 @@ def clean_preliminary(
         df = utils.remove_nan_rows(df)
 
     # df = handle_make(df)
-    df = handle_make_model(df) 
+    df = handle_make_model(df)
 
     df = handle_date_fields(df, is_test)
     #     for df_func in [handle_date_fields, handle_make]: #handle_opc, - Removed because "category" gives us opc_car as a one-hot encoded column with same data

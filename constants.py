@@ -41,7 +41,6 @@ CRITICAL_COLS = [
     "transmission",
     "curb_weight",
     "power",
-    # 'fuel_type',
     "engine_cap",
     "no_of_owners",
     "depreciation",
@@ -58,7 +57,6 @@ STR_COLS = [
     "model",
     "description",
     "type_of_vehicle",
-    #     'fuel_type', #     Since Fuel Type is being handled by function we remove it
     "features",
     "accessories",
 ]
@@ -108,11 +106,35 @@ VEHICLE_CATEGORIES = [
     {"others", "mpv", "stationwagon", "mid-sized sedan"},
 ]
 
-MAKE_MODEL_BINS = [20000,30000,40000,50000,55000,60000,65000,70000,75000,
-          80000,85000,90000,95000,100000,110000,120000,130000,
-          140000,150000,175000,200000,250000,300000,400000,600000,
-          900000,1200000,1600000]
-
 MAKE_MODEL_PRICE_MIN = 8700
 MAKE_MODEL_PRICE_MAX = 1813887.5
-
+MAKE_MODEL_BINS = [
+    20_000,
+    30_000,
+    40_000,
+    50_000,
+    55_000,
+    60_000,
+    65_000,
+    70_000,
+    75_000,
+    80_000,
+    85_000,
+    90_000,
+    95_000,
+    100_000,
+    110_000,
+    120_000,
+    130_000,
+    140_000,
+    150_000,
+    175_000,
+    200_000,
+    250_000,
+    300_000,
+    400_000,
+    600_000,
+    900_000,
+    1_200_000,
+    1_600_000
+]

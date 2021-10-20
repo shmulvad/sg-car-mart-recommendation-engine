@@ -114,7 +114,7 @@ def preds_to_csv(preds: np.ndarray, out: Path = CSV_PREDS_OUT) -> None:
     df.to_csv(out, index_label='Id')
 
 
-def get_make_model_dict(df_original:pd.DataFrame,replace_by_mean = False)->dict():
+def get_make_model_dict(df_original: pd.DataFrame, replace_by_mean=False) -> dict:
     """
     Function used to generate dictionaries used to map (make,model) to nominal value
 
@@ -124,29 +124,27 @@ def get_make_model_dict(df_original:pd.DataFrame,replace_by_mean = False)->dict(
     Returns:
         Dictionary
     """
-
     df = df_original.copy()
     splitted_titles = df.title.apply(str.lower).str.split(" |-")
     df.make = splitted_titles.str[0]
-    df['make_model'] = df.apply(lambda x: x['make']+' '+x['model'], axis=1)
+    df['make_model'] = df.apply(lambda x: x['make'] + ' ' + x['model'], axis=1)
     test = df.groupby('make_model').mean().reset_index()
-    test = test.sort_values('price')[['make_model','price']]
-    
-    if replace_by_mean == False:
+    test = test.sort_values('price')[['make_model', 'price']]
+
+    if not replace_by_mean:
         new_make_model_dict = dict()
         prev = 0
-        for i,untill in enumerate(const.MAKE_MODEL_BINS):
-            subset = test[(test.price>=prev)&(test.price<untill)]
+        for i, untill in enumerate(const.MAKE_MODEL_BINS):
+            subset = test[(test.price >= prev) & (test.price < untill)]
             prev = untill
 
             for key in subset.make_model.unique():
                 new_make_model_dict[key] = i
-        
+
         return new_make_model_dict
-    
-    else:
-        test_min  = const.MAKE_MODEL_PRICE_MIN
-        test_max = const.MAKE_MODEL_PRICE_MAX
-        test['price'] = test['price'].apply(lambda x:int(((x-test_min)/test_max)*1000))
-        make_dict_mean_norm = pd.Series(test.price.values,index=test.make_model).to_dict()
-        return make_dict_mean_norm
+
+    test_min = const.MAKE_MODEL_PRICE_MIN
+    test_max = const.MAKE_MODEL_PRICE_MAX
+    test['price'] = test['price'].apply(lambda x: int(((x - test_min) / test_max)*1000))
+    make_dict_mean_norm = pd.Series(test.price.values, index=test.make_model).to_dict()
+    return make_dict_mean_norm
