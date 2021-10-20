@@ -126,6 +126,8 @@ def get_make_model_dict(df_original:pd.DataFrame,replace_by_mean = False)->dict(
     """
 
     df = df_original.copy()
+    splitted_titles = df.title.apply(str.lower).str.split(" |-")
+    df.make = splitted_titles.str[0]
     df['make_model'] = df.apply(lambda x: x['make']+' '+x['model'], axis=1)
     test = df.groupby('make_model').mean().reset_index()
     test = test.sort_values('price')[['make_model','price']]
