@@ -255,7 +255,11 @@ def to_categorical_for_cols(df: pd.DataFrame) -> pd.DataFrame:
     return pd.concat([df, fuel_type_dummies, binary_cats_df], axis=1)
 
 
-def remove_nominal_cols(df: pd.DataFrame) -> pd.DataFrame:
+def remove_nominal_cols(df: pd.DataFrame, cols_to_keep: list = []) -> pd.DataFrame:
     """
     Removes nominal columns that don't impart any useful information
+    except the columns provided by the user
     """
+    cols_to_remove = [col for col in const.NOMINAL_TO_REMOVE if col not in cols_to_keep]
+
+    return df.drop(columns=cols_to_remove)

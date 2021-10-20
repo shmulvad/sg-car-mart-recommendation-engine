@@ -21,6 +21,9 @@ MOST_SIMILIAR_TEST_PATH = DATA_PATH / "most_similar_test.pkl"
 
 FUEL_TYPE_PATH = SCRAPED_PATH / "listing_id_to_fuel_type.json"
 MAKE_DICT_PATH = SCRAPED_PATH / "make_dict.pkl"
+TEXT_PROCESS_TRAIN_PATH = SCRAPED_PATH / "train_3.tsv"
+TEXT_PROCESS_TEST_PATH = SCRAPED_PATH / "test_3.tsv"
+TEXT_SORTED_FEATURES_JSON_PATH = SCRAPED_PATH / "text_features.json"
 USED_CARS_SIMPLIFIED_PATH = DATA_PATH / "sg-used-cars-final-simplified.csv"
 
 
@@ -71,6 +74,17 @@ NUMBER_COLS = [
     "mileage",
     "omv",
     "arf",
+]
+
+NOMINAL_TO_REMOVE = [
+    "listing_id",
+    "title",
+    "make",
+    "model",
+    "description",
+    "features",
+    "accessories",
+    "opc_scheme",
 ]
 
 TO_SKIP = {
