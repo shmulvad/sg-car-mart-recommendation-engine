@@ -18,6 +18,7 @@ FAIR, GOOD, VERY_GOOD, EXCELLENT = 'Fair', 'Good', 'Very Good', 'Excellent'
 DEAL_OPTIONS = [FAIR, GOOD, VERY_GOOD, EXCELLENT]
 DEAL_PCT_CUTOFFS = 0.1, 0.2, 0.3, 0.6
 
+COLS_TO_SHOW = ['title', 'make', 'model', 'type_of_vehicle', 'price', 'price_predicted']
 BASE_URL = 'https://www.sgcarmart.com/used_cars/info.php?ID='
 
 
@@ -68,12 +69,13 @@ def filter_df(df, brands, vehicles, deal_opt):
         .reset_index()
 
 
-def prepare_df_for_showing(df_filtered):
+def get_df_html(df_filtered) -> str:
     df_show = df_filtered.copy()
     df_show['title'] = df_show.apply(title_with_link, axis=1)
     df_show.price = df_show.price.apply(round)
     df_show.price_predicted = df_show.price_predicted.apply(round)
-    return df_show[['title', 'make', 'model', 'type_of_vehicle', 'price', 'price_predicted']]
+    raw_html = df_show[COLS_TO_SHOW].to_html(escape=False, index=False)
+    return f'<div style="overflow-x:auto;">{raw_html}</div>'
 
 
 def get_plot(df_filtered):
@@ -122,11 +124,10 @@ Here you can check out what the best deals are in the market. For each car, we
 are showing the current listing price on the left as well as what we predict the
 car *should* actually resale for.
 ''')
-st.plotly_chart(get_plot(df_filtered))
+st.plotly_chart(get_plot(df_filtered), use_container_width=True)
 
 st.write('''
 You can check out all the details of the listings above and follow
 the link to purchase the car:
 ''')
-df_show = prepare_df_for_showing(df_filtered)
-st.write(df_show.to_html(escape=False), unsafe_allow_html=True)
+st.write(get_df_html(df_filtered), unsafe_allow_html=True)
