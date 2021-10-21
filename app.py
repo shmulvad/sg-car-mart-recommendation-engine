@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import seaborn as sns
 import plotly.express as px
 
 from constants import TRAIN_PATH
@@ -77,13 +76,16 @@ def prepare_df_for_showing(df_filtered):
     return df_show[['title', 'make', 'model', 'type_of_vehicle', 'price', 'price_predicted']]
 
 
-# def get_plot(df_filtered):
-#     # TODO
-#     df = pd.DataFrame(
-#         columns=['']
-#     )
-#     fig = px.bar(df, x='Price', y=['Real Price', 'Predicted Price'], barmode='group')
-#     return fig
+def get_plot(df_filtered):
+    df = df_filtered.copy()
+    df = df.rename(columns={'title': 'Car', 'price': 'Real Price', 'price_predicted': 'Predicted Price'})
+    fig = px.bar(df,
+                 x='Car',
+                 y=['Real Price', 'Predicted Price'],
+                 barmode='group',
+                 height=500)
+    fig.update_yaxes(title_text='Price')
+    return fig
 
 
 st.write('''
@@ -98,20 +100,33 @@ We scrape sgcarmart.com for the latest car listings. Based on previous resale
 prices, we have trained a predictor to predict the price of the cars. Now, if
 a new car arrives that has a much lower price than what we predict, we can
 tell you that it is a good deal.
+
+Based on your criteria, the cars are shown in the tables below where the ones
+with the biggest relative difference in real price and predicted price are shown
+first.
 ''')
 
 df = get_df()
 deal_opt = st.select_slider('Show all deals that are at least...', DEAL_OPTIONS)
 brands = st.multiselect('Choose the car brands you want shown:', get_brands(df))
 vehicles = st.multiselect('Choose the type of vehicle you want shown:', get_type_of_vehicle(df))
+df_filtered = filter_df(df, brands, vehicles, deal_opt)
+
+if len(df_filtered) == 0:
+    st.write('No cars found matching all your criteria.')
+    st.stop()
+
 
 st.write('''
-Here are the best deals we found that match your criteria:
+Here you can check out what the best deals are in the market. For each car, we
+are showing the current listing price on the left as well as what we predict the
+car *should* actually resale for.
 ''')
-df_filtered = filter_df(df, brands, vehicles, deal_opt)
+st.plotly_chart(get_plot(df_filtered))
+
+st.write('''
+You can check out all the details of the listings above and follow
+the link to purchase the car:
+''')
 df_show = prepare_df_for_showing(df_filtered)
 st.write(df_show.to_html(escape=False), unsafe_allow_html=True)
-
-# TODO
-# st.write('See how good the deals are:')
-# st.pyplot(get_plot(df_filtered))
