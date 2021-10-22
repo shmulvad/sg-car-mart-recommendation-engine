@@ -156,4 +156,4 @@ RF_REG_RAND_GRID = {'n_estimators': n_estimators,
                'min_samples_leaf': min_samples_leaf,
                'bootstrap': bootstrap}
 
-NUM_NA_TRAIN_ITER = 1
+NUM_NA_TRAIN_ITER = 250

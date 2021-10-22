@@ -37,7 +37,7 @@ def train_fill_ml_na(df_original:pd.DataFrame,target_col:str)-> float:
     if regressor == False:
         rf = RandomForestClassifier()
     rf_random = RandomizedSearchCV(estimator = rf, param_distributions = const.RF_REG_RAND_GRID,
-                                    n_iter = const.NUM_NA_TRAIN_ITER, cv = 3, verbose=10, 
+                                    n_iter = const.NUM_NA_TRAIN_ITER, cv = 5, verbose=10, 
                                     random_state=42, n_jobs = -1)
     rf_random.fit(X_train, y_train)
 
