@@ -148,3 +148,15 @@ Local_notebooks/Regressor.ipynb
 Local_notebooks/.DS_Store
 .DS_Store
 Regressor.ipynb
+Fill_na_models/arf.sav
+Fill_na_models/car_age.sav
+Fill_na_models/road_tax.sav
+Fill_na_models/power.sav
+Fill_na_models/no_of_owners.sav
+Fill_na_models/mileage.sav
+Fill_na_models/manufactured.sav
+Fill_na_models/engine_cap.sav
+Fill_na_models/dereg_value.sav
+Fill_na_models/depreciation.sav
+Fill_na_models/curb_weight.sav
+Fill_na_models/coe.sav
