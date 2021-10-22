@@ -1,4 +1,5 @@
 from pathlib import Path
+import numpy as np
 
 GENERATE_SIM_DF = False
 
@@ -82,6 +83,7 @@ NOMINAL_TO_REMOVE = [
     "make",
     "model",
     "description",
+    "registered_date",
     "features",
     "accessories",
     "opc_scheme",
@@ -138,3 +140,20 @@ MAKE_MODEL_BINS = [
     1_200_000,
     1_600_000
 ]
+
+#Grid for RandomSearchCV with RandomForestRegressor
+n_estimators = [int(x) for x in np.linspace(start = 200, stop = 2000, num = 10)]
+max_features = ['auto', 'sqrt']
+max_depth = [int(x) for x in np.linspace(10, 110, num = 11)]
+max_depth.append(None)
+min_samples_split = [2, 5, 10]
+min_samples_leaf = [1, 2, 4]
+bootstrap = [True, False]
+RF_REG_RAND_GRID = {'n_estimators': n_estimators,
+               'max_features': max_features,
+               'max_depth': max_depth,
+               'min_samples_split': min_samples_split,
+               'min_samples_leaf': min_samples_leaf,
+               'bootstrap': bootstrap}
+
+NUM_NA_TRAIN_ITER = 1
