@@ -6,3 +6,4 @@ streamlit==1.0.0
 watchdog==2.1.6
 matplotlib==3.4.3
 plotly==5.3.1
+pandarallel==1.5.4
