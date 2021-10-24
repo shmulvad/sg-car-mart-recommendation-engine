@@ -1,8 +1,12 @@
+# Random stuff added
+.DS_Store
+Regressor.ipynb
 preds.csv
-
 normalisation_data.json
-
-# *.pkl
+Models/
+Local_notebooks/
+data/test_submission*.csv
+data/most_similar*.pkl
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -142,35 +146,3 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
-Local_notebooks/Cleaning_1.ipynb
-.gitignore
-Local_notebooks/Regressor.ipynb
-Local_notebooks/.DS_Store
-.DS_Store
-Regressor.ipynb
-Models/Fill_na_models_using_price/car_age.sav
-Models/Fill_na_models_using_price/coe.sav
-Models/Fill_na_models_using_price/curb_weight.sav
-Models/Fill_na_models_using_price/depreciation.sav
-Models/Fill_na_models_using_price/dereg_value.sav
-Models/Fill_na_models_using_price/engine_cap.sav
-Models/Fill_na_models_using_price/manufactured.sav
-Models/Fill_na_models_using_price/mileage.sav
-Models/Fill_na_models_using_price/no_of_owners.sav
-Models/Fill_na_models_using_price/power.sav
-Models/Fill_na_models_using_price/road_tax.sav
-Models/Fill_na_models_using_price/arf.sav
-Models/Fill_na_models/arf.sav
-Models/Fill_na_models/car_age.sav
-Models/Fill_na_models/coe.sav
-Models/Fill_na_models/curb_weight.sav
-Models/Fill_na_models/depreciation.sav
-Models/Fill_na_models/dereg_value.sav
-Models/Fill_na_models/engine_cap.sav
-Models/Fill_na_models/manufactured.sav
-Models/Fill_na_models/mileage.sav
-Models/Fill_na_models/no_of_owners.sav
-Models/Fill_na_models/power.sav
-Models/Fill_na_models/road_tax.sav
-data/test_submission_ml_filled.csv
-data/test_submission_ml_filled2.csv
