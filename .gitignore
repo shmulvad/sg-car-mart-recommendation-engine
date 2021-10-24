@@ -2,7 +2,7 @@ preds.csv
 
 normalisation_data.json
 
-*.pkl
+# *.pkl
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
