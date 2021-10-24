@@ -216,7 +216,7 @@ def handle_make_model(df_original: pd.DataFrame, replace_by_bins=False) -> pd.Da
         make_model_dict = pickle.load(f)
 
     df.make_model = df.make_model.map(make_model_dict)
-    df.make_model = df.make_model.astype("category")
+    # df.make_model = df.make_model.astype("category")
 
     return df
 
