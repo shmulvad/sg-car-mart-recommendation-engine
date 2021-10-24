@@ -140,6 +140,8 @@ def handle_date_fields(
     # df.lifespan = df.lifespan.fillna(df.registered_date + pd.Timedelta(days=7304))
 
     # Remember to remove a row with manufactured as 2925 (bad value)
+    na_filler = pd.Series(pd.DatetimeIndex(df.registered_date).year)
+    df.manufactured = df.manufactured.fillna(na_filler)
     df["car_age"] = datetime.now().year - df.manufactured
     if not is_test:
         df = df.drop(df[(df.car_age > const.MAX_CAR_AGE) | (df.car_age < 0)].index)
