@@ -54,7 +54,8 @@ def compute_row_similarity(row1: pd.Series, row2: pd.Series,
 
 def compute_similarities(main_df: pd.DataFrame, train_df: pd.DataFrame,
                          verbose: bool = False,
-                         is_test: bool = False) -> pd.DataFrame:
+                         is_test: bool = False,
+                         parallelize_inner: bool = False) -> pd.DataFrame:
     """
     Computes the similarity between the rows in the dataframe that has missing
     values in critical columns compared to all other rows in DataFrame.
@@ -67,20 +68,20 @@ def compute_similarities(main_df: pd.DataFrame, train_df: pd.DataFrame,
         def compute_similarities_for_specific_row(row_to_compare: pd.Series) -> float:
             return compute_row_similarity(row, row_to_compare, train_df)
 
-        apply_func = train_df.parallel_apply if is_test else train_df.apply
-        return apply_func(compute_similarities_for_specific_row, axis=1)
+        apply_func_inner = train_df.parallel_apply if parallelize_inner else train_df.apply
+        return apply_func_inner(compute_similarities_for_specific_row, axis=1)
 
     warm_cache(train_df)
     # If testing, there is only one row and as such it makes more sense
     # to do the parallel computation in inner func and not here. When we clean
     # test data, there are many rows and as such it makes more sense to do the
     # parallel computation in the outer func.
-    if is_test:
-        sim_df = main_df.apply(compute_similarities_for_given_row, axis=1)
-    else:
-        criticals = main_df[main_df.apply(utils.has_nan_in_critial_col, axis=1)]
-        sim_df = criticals.parallel_apply(compute_similarities_for_given_row, axis=1)
-    return sim_df
+    df_to_use = main_df
+    if not is_test:
+        df_to_use = main_df[main_df.apply(utils.has_nan_in_critial_col, axis=1)]
+
+    apply_func_outer = df_to_use.apply if parallelize_inner else df_to_use.parallel_apply
+    return apply_func_outer(compute_similarities_for_given_row, axis=1)
 
 
 def replace_nan_with_most_similar(main_df: pd.DataFrame,

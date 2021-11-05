@@ -108,6 +108,16 @@ def handle_fuel_type_using_scraped_data(df_original: pd.DataFrame) -> pd.DataFra
     return df
 
 
+def handle_fuel_type(df_original: pd.DataFrame) -> pd.DataFrame:
+    """
+    Tries to clean fuel type based on the description and features, falling
+    back to scraped data if nothing can be found in the other columns
+    """
+    df = handle_fuel_type_using_other_cols(df_original)
+    df = handle_fuel_type_using_scraped_data(df)
+    return df
+
+
 def handle_date_fields(
     df_original: pd.DataFrame, is_test: bool = False
 ) -> pd.DataFrame:
@@ -140,6 +150,8 @@ def handle_date_fields(
     # df.lifespan = df.lifespan.fillna(df.registered_date + pd.Timedelta(days=7304))
 
     # Remember to remove a row with manufactured as 2925 (bad value)
+    na_filler = pd.Series(pd.DatetimeIndex(df.registered_date).year)
+    df.manufactured = df.manufactured.fillna(na_filler)
     df["car_age"] = datetime.now().year - df.manufactured
     if not is_test:
         df = df.drop(df[(df.car_age > const.MAX_CAR_AGE) | (df.car_age < 0)].index)
@@ -184,38 +196,33 @@ def handle_make(df_original: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def handle_make_model(df_original: pd.DataFrame, replace_by_bins = False) -> pd.DataFrame:
+def handle_make_model(df_original: pd.DataFrame, replace_by_bins=False) -> pd.DataFrame:
     """
     Combines the make and model of the car, and assigns it an ordinal value
-    between 0-1000, according to the average price for the (make,model)
+    between 0-1000, according to the average price for the (make, model)
 
     There is also an option to replace by bin value between 0-27 if we need lesser unique values
     """
+    if "title" not in df_original or "make" not in df_original:
+        return df_original
+
     df = df_original.copy()
     splitted_titles = df.title.apply(str.lower).str.split(" |-")
     df.make = splitted_titles.str[0]
     df['make_model'] = df.apply(lambda x: x['make']+' '+x['model'], axis=1)
 
-    a_file = None
-    if replace_by_bins == True:
-        a_file = open(const.MAKE_MODEL_BIN_PATH, "rb")
-    else:
-        a_file = open(const.MAKE_MODEL_DICT_MEAN_PATH, "rb")
+    path = const.MAKE_MODEL_BIN_PATH if replace_by_bins else const.MAKE_MODEL_DICT_MEAN_PATH
+    with open(path, "rb") as f:
+        make_model_dict = pickle.load(f)
 
-    make_dict = pickle.load(a_file)
-    a_file.close()
-
-    df.make_model = df.make_model.map(make_dict)
-    df.make_model = df.make_model.astype("category")
+    df.make_model = df.make_model.map(make_model_dict)
+    # df.make_model = df.make_model.astype("category")
 
     return df
 
 
-def clean_preliminary(
-    df_original: pd.DataFrame,
-    is_test: bool = False
-    #   ,clean_fuel_type_with_scraped: bool = False
-) -> pd.DataFrame:
+def clean_preliminary(df_original: pd.DataFrame,
+                      is_test: bool = False) -> pd.DataFrame:
     """
     Runs the preliminary cleaning on the df before we start finding
     similarities.
@@ -229,12 +236,8 @@ def clean_preliminary(
     if not is_test:
         df = utils.remove_nan_rows(df)
 
-    # df = handle_make(df)
     df = handle_make_model(df)
-
     df = handle_date_fields(df, is_test)
-    #     for df_func in [handle_date_fields, handle_make]: #handle_opc, - Removed because "category" gives us opc_car as a one-hot encoded column with same data
-    #         df = df_func(df, is_test)
 
     intersect_cols = set(df.columns) & set(const.STR_COLS)
     for str_col in intersect_cols:
@@ -251,12 +254,7 @@ def clean_preliminary(
         df.category = df.category.apply(string_to_set)
 
     if "fuel_type" in df:
-        # fuel_func = (handle_fuel_type_using_scraped_data
-        #              if clean_fuel_type_with_scraped
-        #              else handle_fuel_type_using_other_cols)
-        # df = fuel_func(df)
-        df = handle_fuel_type_using_other_cols(df)
-        df = handle_fuel_type_using_scraped_data(df)
+        df = handle_fuel_type(df)
 
     if "price" in df:
         df.price = df.price.apply(round)

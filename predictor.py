@@ -12,12 +12,13 @@ from utils import rmse, vprint
 import constants as const
 
 
-def train_fill_ml_na(df_original:pd.DataFrame,target_col:str)-> float:
+def train_fill_ml_na(df_original:pd.DataFrame,target_col:str,use_price = False)-> float:
     """[summary]
 
     Args:
         df_original (pd.DataFrame): Dataframe to be processed
         target_col (str): Column to train model for
+        use_price (bool): use price as a feature in the model. Defaults to False
 
     Returns:
         float: Mean absolute error, as a percentage of mean column value
@@ -27,7 +28,13 @@ def train_fill_ml_na(df_original:pd.DataFrame,target_col:str)-> float:
     df = df_original.copy()
     predict_df = df[df[target_col].isna()].drop([target_col],axis=1)
     drop_predict_cols = [col for col in predict_df.columns if sum(predict_df[col].isna())>predict_df.shape[0]*0.2]
+    with open('scraped_data/cols_to_drop/'+target_col+'_cols.txt', "wb") as fp:
+        pickle.dump(drop_predict_cols, fp)
     target = df[~df[target_col].isna()].drop(drop_predict_cols,axis=1).dropna()
+    if use_price == False:
+        for temp_df in [predict_df,target]:
+            if 'price' in temp_df.columns:
+                temp_df.drop(['price'],axis=1,inplace=True)
 
     X = target.drop([target_col],axis=1)
     Y = target[target_col]
@@ -37,7 +44,7 @@ def train_fill_ml_na(df_original:pd.DataFrame,target_col:str)-> float:
     if regressor == False:
         rf = RandomForestClassifier()
     rf_random = RandomizedSearchCV(estimator = rf, param_distributions = const.RF_REG_RAND_GRID,
-                                    n_iter = const.NUM_NA_TRAIN_ITER, cv = 5, verbose=10, 
+                                    n_iter = const.NUM_NA_TRAIN_ITER, cv = const.K_CROSS_FOLD_NA_TRAIN, verbose=10, 
                                     random_state=42, n_jobs = -1)
     rf_random.fit(X_train, y_train)
 
@@ -50,47 +57,56 @@ def train_fill_ml_na(df_original:pd.DataFrame,target_col:str)-> float:
 
     best_rf = rf_random.best_estimator_
     best_rf.fit(X, Y)
-    filename = 'Fill_na_models/'+target_col+'.sav'
+    filename = 'Models/Fill_na_models/'+target_col+'.sav'
     pickle.dump(best_rf, open(filename, 'wb'))
 
     return error
 
 
-def fill_ml_na_col(df_original:pd.DataFrame,target_col:str)->pd.DataFrame:
+def fill_ml_na_col(df_original:pd.DataFrame,target_col:str,use_price = False)->pd.DataFrame:
     """[summary]
 
     Args:
         df_original (pd.DataFrame): Dataframe to be processed
         target_col (str): column to fill values for
-        infer (bool, optional): Defaults to False, trains models in this setting
+        use_price (bool): use price as a feature in the model. Defaults to False
 
     Returns:
         pd.DataFrame: Processed dataframe with
     """
-    filename = 'Fill_na_models/'+target_col+'.sav'
+    filename = 'Models/Fill_na_models/'+target_col+'.sav'
     if not os.path.exists(filename):
-            print("Model has not been trained")
-            return None
-
+        print(target_col + " has not been trained")
+        return df_original
+    
     df = df_original.copy()    
     predict_df = df[df[target_col].isna()].drop([target_col],axis=1)
-    drop_predict_cols = [col for col in predict_df.columns if sum(predict_df[col].isna())>predict_df.shape[0]*0.2]
-    predict_df.drop(drop_predict_cols,axis=1,inplace=True)
+
+    cols_to_drop_ml_infer = None
+    with open('scraped_data/cols_to_drop/'+target_col+'_cols.txt', "rb") as fp:
+        cols_to_drop_ml_infer = pickle.load(fp)
+    
+    predict_df.drop(cols_to_drop_ml_infer,axis=1,inplace=True)
     predict_df.dropna(inplace=True)
+    if use_price == False and 'price' in predict_df.columns:
+        predict_df.drop(['price'],axis=1,inplace=True)
 
     model = pickle.load(open(filename, 'rb'))
+    if predict_df.shape[0] == 0:
+        return df
     values = model.predict(predict_df)
 
     df.loc[predict_df.index,target_col] = values
 
     return df
 
-def fill_ml_na(df_orginal:pd.DataFrame,training = False)->pd.DataFrame:
+def fill_ml_na(df_orginal:pd.DataFrame,training = False,use_price = False)->pd.DataFrame:
     """[summary]
 
     Args:
         df_orginal (pd.DataFrame): Dataframe to fill values for
         training (bool, optional): Set True to Train Model. Defaults to False.
+        use_price (bool): use price as a feature in the model. Defaults to False
 
     Returns:
         pd.DataFrame: Filled DataFrame
@@ -103,9 +119,9 @@ def fill_ml_na(df_orginal:pd.DataFrame,training = False)->pd.DataFrame:
 
     for target_col,num_na in to_do:
         if training:
-            error = train_fill_ml_na(df,target_col)
+            error = train_fill_ml_na(df,target_col,use_price)
             print("Error for training "+target_col+" is: ", error)
-        df = fill_ml_na_col(df,target_col)
+        df = fill_ml_na_col(df,target_col,use_price)
 
     return df
 

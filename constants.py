@@ -20,6 +20,9 @@ CSV_PREDS_OUT = Path("preds.csv")
 MOST_SIMILIAR_TRAIN_PATH = DATA_PATH / "most_similar_train.pkl"
 MOST_SIMILIAR_TEST_PATH = DATA_PATH / "most_similar_test.pkl"
 
+SIM_REPLACED_TRAIN = DATA_PATH / "train_sim_filled.csv"
+SIM_REPLACED_TEST = DATA_PATH / "test_sim_filled.csv"
+
 FUEL_TYPE_PATH = SCRAPED_PATH / "listing_id_to_fuel_type.json"
 MAKE_DICT_PATH = SCRAPED_PATH / "make_dict.pkl"
 MAKE_MODEL_BIN_PATH = SCRAPED_PATH / "make_model_bins.pkl"
@@ -157,3 +160,4 @@ RF_REG_RAND_GRID = {'n_estimators': n_estimators,
                'bootstrap': bootstrap}
 
 NUM_NA_TRAIN_ITER = 250
+K_CROSS_FOLD_NA_TRAIN = 3
