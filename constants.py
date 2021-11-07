@@ -149,9 +149,9 @@ MAKE_MODEL_BINS = [
 
 # Grid for RandomSearchCV with RandomForestRegressor
 # TODO: I think it is more suitable to put these into the relevant notebook
-n_estimators = [int(x) for x in np.linspace(start=200, stop=2000, num=10)]
+n_estimators = list(np.linspace(start=200, stop=2000, num=10, dtype=int))
+max_depth = list(np.linspace(start=10, stop=110, num=11, dtype=int))
 max_features = ['auto', 'sqrt']
-max_depth = [int(x) for x in np.linspace(10, 110, num=11)]
 max_depth.append(None)
 min_samples_split = [2, 5, 10]
 min_samples_leaf = [1, 2, 4]
