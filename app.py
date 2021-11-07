@@ -1,11 +1,10 @@
-import streamlit as st
-import pandas as pd
 import numpy as np
+import pandas as pd
 import plotly.express as px
+import streamlit as st
 
-from constants import TRAIN_PATH
 import utils
-
+from constants import TRAIN_PATH
 
 st.set_page_config(
     page_title='The Best Car Deals in SG',

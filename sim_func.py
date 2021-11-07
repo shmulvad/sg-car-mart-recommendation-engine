@@ -1,9 +1,9 @@
-from typing import Any, Set
-from numbers import Number
 from difflib import SequenceMatcher
+from numbers import Number
+from typing import Any, Set
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 import utils
 

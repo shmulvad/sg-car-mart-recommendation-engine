@@ -1,11 +1,11 @@
 from typing import Optional
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 from tqdm import tqdm
 
 import utils
-from constants import TO_SKIP, NAN_PENALTY
+from constants import NAN_PENALTY, TO_SKIP
 from sim_func import SIM_FUNCS, numerical_difference
 
 

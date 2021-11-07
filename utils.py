@@ -1,13 +1,10 @@
-from typing import Any
 from pathlib import Path
+from typing import Any
 
-import pandas as pd
 import numpy as np
-from tqdm import tqdm
+import pandas as pd
 from sklearn.metrics import mean_squared_error as mse
-
-from constants import MAX_NUM_NANS, COLS_TO_DROP, CRITICAL_COLS, \
-                      CSV_PREDS_OUT
+from tqdm import tqdm
 
 import constants as const
 
@@ -25,7 +22,7 @@ def isnan(value: Any) -> bool:
     return value != value
 
 
-def remove_nan_rows(df: pd.DataFrame, threshold=MAX_NUM_NANS) -> pd.DataFrame:
+def remove_nan_rows(df: pd.DataFrame, threshold=const.MAX_NUM_NANS) -> pd.DataFrame:
     """
     Removes all rows from dataset where the number of
     NaN columns is above threshold
@@ -36,7 +33,7 @@ def remove_nan_rows(df: pd.DataFrame, threshold=MAX_NUM_NANS) -> pd.DataFrame:
 
 def drop_bad_cols(df: pd.DataFrame) -> None:
     """Drops all COLS_TO_DROP from df inplace"""
-    df.drop(COLS_TO_DROP, axis=1, inplace=True, errors='ignore')
+    df.drop(const.COLS_TO_DROP, axis=1, inplace=True, errors='ignore')
 
 
 def get_max_squared_diff(train_df: pd.DataFrame, col: str) -> float:
@@ -69,7 +66,7 @@ def has_nan_in_critial_col(row: pd.Series) -> bool:
     Checks whether a row has at least one critical
     column with a NaN
     """
-    return any(isnan(row[col]) for col in CRITICAL_COLS if col in row)
+    return any(isnan(row[col]) for col in const.CRITICAL_COLS if col in row)
 
 
 def get_top_k_most_similar(sim_df, k=3000):
@@ -104,7 +101,7 @@ def rmse(*args, **kwargs) -> float:
     return mse(*args, **kwargs, squared=False)
 
 
-def preds_to_csv(preds: np.ndarray, out: Path = CSV_PREDS_OUT) -> None:
+def preds_to_csv(preds: np.ndarray, out: Path = const.CSV_PREDS_OUT) -> None:
     """
     Takes a 1D numpy array of predictions and optionally an out path and writes
     them to a csv file. Assumes that the predictions are given in the same

@@ -1,4 +1,5 @@
 from pathlib import Path
+
 import numpy as np
 
 GENERATE_SIM_DF = False
@@ -95,11 +96,11 @@ NOMINAL_TO_REMOVE = [
 TO_SKIP = {
     "listing_id",
     "description",
-    "original_reg_date",  # Probably handle later
-    "reg_date",  # Probably handle later
-    "lifespan",  # Probably handle later
-    "features",  # Maybe handle later
-    "accessories",  # Maybe handle later
+    "original_reg_date",
+    "reg_date",
+    "lifespan",
+    "features",
+    "accessories",
     "indicative_price",
 }
 
@@ -112,7 +113,7 @@ VEHICLE_CATEGORIES = [
 ]
 
 MAKE_MODEL_PRICE_MIN = 8700
-MAKE_MODEL_PRICE_MAX = 1813887.5
+MAKE_MODEL_PRICE_MAX = 1_813_887.5
 MAKE_MODEL_BINS = [
     20_000,
     30_000,
@@ -144,20 +145,21 @@ MAKE_MODEL_BINS = [
     1_600_000
 ]
 
-#Grid for RandomSearchCV with RandomForestRegressor
-n_estimators = [int(x) for x in np.linspace(start = 200, stop = 2000, num = 10)]
+# Grid for RandomSearchCV with RandomForestRegressor
+# TODO: I think it is more suitable to put these into the relevant notebook
+n_estimators = [int(x) for x in np.linspace(start=200, stop=2000, num=10)]
 max_features = ['auto', 'sqrt']
-max_depth = [int(x) for x in np.linspace(10, 110, num = 11)]
+max_depth = [int(x) for x in np.linspace(10, 110, num=11)]
 max_depth.append(None)
 min_samples_split = [2, 5, 10]
 min_samples_leaf = [1, 2, 4]
 bootstrap = [True, False]
 RF_REG_RAND_GRID = {'n_estimators': n_estimators,
-               'max_features': max_features,
-               'max_depth': max_depth,
-               'min_samples_split': min_samples_split,
-               'min_samples_leaf': min_samples_leaf,
-               'bootstrap': bootstrap}
+                    'max_features': max_features,
+                    'max_depth': max_depth,
+                    'min_samples_split': min_samples_split,
+                    'min_samples_leaf': min_samples_leaf,
+                    'bootstrap': bootstrap}
 
 NUM_NA_TRAIN_ITER = 250
 K_CROSS_FOLD_NA_TRAIN = 3
