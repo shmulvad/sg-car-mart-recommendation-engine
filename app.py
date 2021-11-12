@@ -3,14 +3,19 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-import utils
-from constants import TRAIN_PATH
+DATA_PATH = 'data/train_predicted.csv'
+
 
 st.set_page_config(
     page_title='The Best Car Deals in SG',
     page_icon='💰🚗',
     initial_sidebar_state='collapsed'
 )
+
+
+def isnan(value) -> bool:
+    """Returns True if value is NaN, otherwise False"""
+    return value != value
 
 
 FAIR, GOOD, VERY_GOOD, EXCELLENT = 'Fair', 'Good', 'Very Good', 'Excellent'
@@ -25,9 +30,7 @@ BASE_URL = 'https://www.sgcarmart.com/used_cars/info.php?ID='
 def get_df():
     # Just for experimenting, in the end we will use the data from our best
     # predictor for the price_predicted
-    df = pd.read_csv(TRAIN_PATH)
-    mult = np.random.normal(0, 0.2, size=df.shape[0])
-    df['price_predicted'] = df.price + df.price * mult
+    df = pd.read_csv(DATA_PATH)
     diff = df.price_predicted - df.price
     df['pct_diff'] = diff / df.price
     for label, pct_cutoff in zip(DEAL_OPTIONS, DEAL_PCT_CUTOFFS):
@@ -37,12 +40,12 @@ def get_df():
 
 def get_brands(df):
     return [brand.capitalize() for brand in df['make'].unique()
-            if not utils.isnan(brand)]
+            if not isnan(brand)]
 
 
 def get_type_of_vehicle(df):
     return [vehicle.capitalize() for vehicle in df['type_of_vehicle'].unique()
-            if not utils.isnan(vehicle)]
+            if not isnan(vehicle)]
 
 
 def lowercase_iter(iterable):
