@@ -1,15 +1,15 @@
-from datetime import datetime
 import json
 import pickle
 import re
-from typing import Optional, Set
+from datetime import datetime
+from typing import List, Optional, Set
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 from sklearn.preprocessing import MultiLabelBinarizer
 
-import utils
 import constants as const
+import utils
 
 SPLIT_RE = re.compile(r"; |,|\*|\s|&|\|")
 
@@ -58,10 +58,8 @@ def vehicle_type_to_cat_num(type_of_vehicle: str) -> int:
 
 def handle_fuel_type_using_other_cols(df_original: pd.DataFrame) -> pd.DataFrame:
     """
-    Tries to clean fuel type based on the description and features, falling
-    back to 'petrol' for NaN values if nothing else can be found
+    Tries to clean fuel type based on the description and features
     """
-
     def helper(row: pd.Series) -> str:
         if isinstance(row.fuel_type, str) and row.fuel_type:
             return row.fuel_type
@@ -201,7 +199,8 @@ def handle_make_model(df_original: pd.DataFrame, replace_by_bins=False) -> pd.Da
     Combines the make and model of the car, and assigns it an ordinal value
     between 0-1000, according to the average price for the (make, model)
 
-    There is also an option to replace by bin value between 0-27 if we need lesser unique values
+    There is also an option to replace by bin value between 0-27 if we need
+    lesser unique values
     """
     if "title" not in df_original or "make" not in df_original:
         return df_original
@@ -216,7 +215,6 @@ def handle_make_model(df_original: pd.DataFrame, replace_by_bins=False) -> pd.Da
         make_model_dict = pickle.load(f)
 
     df.make_model = df.make_model.map(make_model_dict)
-    # df.make_model = df.make_model.astype("category")
 
     return df
 
@@ -230,22 +228,18 @@ def new_clean(df,is_test=False):
 
     if "transmission" in df:
         df.transmission = df.transmission.map(const.TRANSMISSION_MAP)
-        
+
     if "fuel_type" in df:
         df = handle_fuel_type(df)
 
-    cols_to_keep: list = []
-    cols_to_remove = [col for col in const.NOMINAL_TO_REMOVE if col not in cols_to_keep]
+    df.drop(columns=const.NOMINAL_TO_REMOVE, inplace=True)
+    df.drop(['arf', 'road_tax', 'dereg_value', 'depreciation'], axis=1, inplace=True)
 
-    df.drop(columns=cols_to_remove,inplace=True)
-    df.drop(['arf','road_tax','dereg_value','depreciation'],axis=1,inplace=True)
-    
-    for cols in ['type_of_vehicle','category','transmission','fuel_type','make_model']:
-        df[cols] = df[cols].astype("category")
-        
-    df.mileage = df.mileage.apply(lambda x:np.log(x))
-    df.engine_cap = df.engine_cap.apply(lambda x:np.square(x))
-  
+    for col in ['type_of_vehicle', 'category', 'transmission', 'fuel_type', 'make_model']:
+        df[col] = df[col].astype("category")
+
+    df.mileage = df.mileage.apply(np.log)
+    df.engine_cap = df.engine_cap.apply(np.square)
     return df
 
 
@@ -305,16 +299,18 @@ def to_categorical_for_cols(df: pd.DataFrame) -> pd.DataFrame:
     binary_cats_df.drop(["electric_cars", "hybrid_cars"], axis=1, inplace=True)
     binary_cats_df.rename(columns={"-": "missing_category"}, inplace=True)
 
-    df = df.drop(columns=["fuel_type", "category"])
-
+    df.drop(columns=["fuel_type", "category"], inplace=True)
     return pd.concat([df, fuel_type_dummies, binary_cats_df], axis=1)
 
 
-def remove_nominal_cols(df: pd.DataFrame, cols_to_keep: list = []) -> pd.DataFrame:
+def remove_nominal_cols(df: pd.DataFrame,
+                        cols_to_keep: Optional[List[str]] = None) -> pd.DataFrame:
     """
     Removes nominal columns that don't impart any useful information
     except the columns provided by the user
     """
-    cols_to_remove = [col for col in const.NOMINAL_TO_REMOVE if col not in cols_to_keep]
+    cols_to_remove = const.NOMINAL_TO_REMOVE
+    if cols_to_keep:
+        cols_to_remove = list(set(cols_to_remove) - set(cols_to_keep))
 
     return df.drop(columns=cols_to_remove)
