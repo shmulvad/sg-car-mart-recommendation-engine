@@ -86,11 +86,14 @@ def get_top_k_most_similar(sim_df, k=3000):
     """
     Gets the indices of the top k most similar rows based on a
     similarity df with the scores. If sim_df has shape (N, M)
-    then the output dataframe will have shape (N, k) where k << M
+    then the output dataframe will have shape (N, k) where k << M.
+    If k is `None`, all rows are returned.
     """
     indices = np.argsort(-sim_df, axis=1)
-    top_k = indices.iloc[:, :k]
-    return top_k
+    if k is None:
+        return indices
+
+    return indices.iloc[:, :k]
 
 
 def create_weights_df(sim_df: pd.DataFrame, top_k: pd.DataFrame,
