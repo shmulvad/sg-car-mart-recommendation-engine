@@ -36,6 +36,19 @@ def drop_bad_cols(df: pd.DataFrame) -> None:
     df.drop(const.COLS_TO_DROP, axis=1, inplace=True, errors='ignore')
 
 
+def round_to_nearest_hundred(num: int) -> int:
+    """
+    Rounds a numeric value to the nearest 100
+
+    Example:
+    >>> round_to_nearest_hundred(149.99999)
+    100
+    >>> round_to_nearest_hundred(150)
+    200
+    """
+    return int(round(num, -2))
+
+
 def get_max_squared_diff(train_df: pd.DataFrame, col: str) -> float:
     """
     Returns the squared diff of the 5th quantile and 95th quantile
