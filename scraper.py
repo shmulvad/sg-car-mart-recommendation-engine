@@ -79,28 +79,14 @@ def get_fuel_type_only_on_car_code(car_code: CarCode) -> SubCode:
     return fuel_type
 
 
-def get_all_car_codes_sub_car_codes(df_original: pd.DataFrame) -> pd.DataFrame:
-    """
-    Tries to scrape the car code, sub code and fuel type for all car listings
-    in the given dataframe
-    """
-    df = df_original.copy()
-    df["CarCode"] = df.listing_id.apply(get_car_code_from_listing)
-    df["SubCode"] = df["CarCode"].apply(get_subcode_from_car_code)
-    df["FuelTypeScraped"] = df["CarCode"].apply(get_fuel_type_only_on_car_code)
-    return df
-
-
 def get_fuel_value(fuel_value: str) -> str:
-    """
-    To standardize the final fuel_type values in the dictionary
-    """
-    if "petrol-electric" in str.lower(x):
-        return "petrol-electric"
-    if "diesel" in str.lower(x):
-        return "diesel"
-    if "electric" in str.lower(x):
-        return "electric"
+    """To standardize the final fuel_type values in the dictionary"""
+    fuel_value = fuel_value.lower()
+    for fuel_type in ["petrol-electric", "diesel", "electric"]:
+        if fuel_type in fuel_value:
+            return fuel_type
+
+    # Fallback value
     return "petrol"
 
 
@@ -123,4 +109,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
