@@ -1,11 +1,10 @@
+import os
+import pickle
 
 import pandas as pd
-import pickle
-import os
-from sklearn.model_selection import RandomizedSearchCV
-from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_absolute_error, f1_score
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from sklearn.metrics import f1_score, mean_absolute_error
+from sklearn.model_selection import RandomizedSearchCV, train_test_split
 
 import constants as const
 
@@ -29,7 +28,7 @@ def train_fill_ml_na(df_original: pd.DataFrame, target_col: str, use_price=False
     with open('scraped_data/cols_to_drop/'+target_col+'_cols.txt', "wb") as fp:
         pickle.dump(drop_predict_cols, fp)
     target = df[~df[target_col].isna()].drop(drop_predict_cols, axis=1).dropna()
-    if use_price == False:
+    if not use_price:
         for temp_df in [predict_df, target]:
             if 'price' in temp_df.columns:
                 temp_df.drop(['price'], axis=1, inplace=True)
@@ -39,12 +38,16 @@ def train_fill_ml_na(df_original: pd.DataFrame, target_col: str, use_price=False
     X_train, X_test, y_train, y_test = train_test_split(
         X, Y, test_size=0.15, random_state=42)
 
-    rf = RandomForestRegressor()
-    if regressor == False:
-        rf = RandomForestClassifier()
-    rf_random = RandomizedSearchCV(estimator=rf, param_distributions=const.RF_REG_RAND_GRID,
-                                   n_iter=const.NUM_NA_TRAIN_ITER, cv=const.K_CROSS_FOLD_NA_TRAIN, verbose=10,
-                                   random_state=42, n_jobs=-1)
+    rf = RandomForestRegressor if regressor else RandomForestClassifier
+    rf_random = RandomizedSearchCV(
+        estimator=rf(),
+        param_distributions=const.RF_REG_RAND_GRID,
+        n_iter=const.NUM_NA_TRAIN_ITER,
+        cv=const.K_CROSS_FOLD_NA_TRAIN,
+        verbose=10,
+        random_state=42,
+        n_jobs=-1
+    )
     rf_random.fit(X_train, y_train)
 
     pred = rf_random.predict(X_test)
