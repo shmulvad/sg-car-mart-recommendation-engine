@@ -13,7 +13,6 @@ MAX_CAR_AGE = 50
 
 DATA_PATH = Path("data")
 SCRAPED_PATH = Path("scraped_data")
-INTERMEDIATE_PATH = Path("intermediate_data")
 
 TRAIN_PATH = DATA_PATH / "train.csv"
 TEST_PATH = DATA_PATH / "test.csv"
@@ -25,6 +24,7 @@ MOST_SIMILIAR_TEST_PATH = DATA_PATH / "most_similar_test.pkl"
 SIM_REPLACED_TRAIN = DATA_PATH / "train_sim_filled.csv"
 SIM_REPLACED_TEST = DATA_PATH / "test_sim_filled.csv"
 
+CAR_CODE_PATH = SCRAPED_PATH/ "listing_carcode.csv"
 FUEL_TYPE_PATH = SCRAPED_PATH / "listing_id_to_fuel_type.json"
 MAKE_DICT_PATH = SCRAPED_PATH / "make_dict.pkl"
 MAKE_MODEL_BIN_PATH = SCRAPED_PATH / "make_model_bins.pkl"
