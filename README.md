@@ -8,15 +8,12 @@ Our project for the module [CS5228 Knowledge Discovery and Data Mining][mod] at 
 
 ## TODO
 
-- [ ] We have a weird folder called `0_dev`. I am not really sure what the two notebooks in there do. Looks like they might be related to cleaning before we unified the cleaning methods? If that's the case, it should be deleted.
 - [ ] I cannot find the code for the regressors. Has this been committed?
-- [ ] We have data files in `/data`, `/scraped_data`, `/task1` and `/task1/data`.
-- [ ] What is the point of all the files in `/scraped_data/cols_to_drop`? They look very weird on my end.
+- [ ] We have some data files in `/scraped_data` that are not actually scraped. If used, they should be moved to `/data`, otherwise deleted. Similarly, the files in `/data` that are not used anywhere should be deleted.
 - [ ] There should be some more explanation of the files in `/scraped_data`. For example, what is `train_3.tsv` and `test_3.tsv`?
 - [ ] Are we using the contents of `predictor.py` in any notebooks? I cannot find it if that is the case.
-- [ ] `dl.py` is extremely unreadable. There are many variables that are undefined, there is no documentation, etc. In general, it deviates a lot from the remaining codebase.
-- [ ] Maybe we should move the Streamlit app to a separate repo. Often, the Heroku deployment may fail due to a lot of large files or installs that actually aren't needed for Streamlit. If so, then we can also remove files like `Procfile`, `setup.sh`, etc.
 - [ ] We should probably include the code that was used for scraping
+- [ ] `ensemble_csvs.ipynb` should be deleted if we are not using it, otherwise expanded upon below.
 
 
 ### Getting Started
@@ -32,6 +29,8 @@ $ pip install -r requirements.txt
 
 ### Project Structure
 
+## Library Code
+
 `data/` is a folder containing the raw train/test data, the same data after doing preliminary cleaning and replacing missing values using similarity approach and an embedding matrix for the cleaned train data (for use in task 2).
 
 `scraped_data/` is a folder containing all the data that was scraped from the internet. We mainly scraped the fuel type.
@@ -46,7 +45,17 @@ $ pip install -r requirements.txt
 
 `item_filters.py` defines code that is used for task 2 for filtering items based on whether certain criteria are met.
 
-TODO: `dl.py`, `predictor.py`, `eda_pr.ipynb`, `ensemble_csvs.ipynb`,
+`predictor.py` TODO
+
+
+
+## Notebooks
+
+`eda.ipynb` contains the code that was used for doing exploratory data analysis and the code to generate the plots we include in our report.
+
+`task2.ipynb` implements and presents the recommender system. Note that a sentence transformer model is used which may take some time to download a model.
+
+
 
 ### Task 1 - Regression of Car Resale Price
 
@@ -62,10 +71,12 @@ Our entry point for Task 2, recommendations for similar rows, can be found in `t
 
 Task 3 is implemented in a two-fold manner.
 
-First, there is a [Streamlit][streamlit] web app that can be found in `app.py` and is deployed to <https://best-sg-car-deals.herokuapp.com>. It can be run locally by executing `streamlit run app.py` (assuming the user has already followed the installation guide and navigated to the project folder). Otherwise it can be accessed by following the deployment link. It is deployed on a free tier at Heroku, so it may load for quite some time initially since the server has to start up.
+First, there is a [Streamlit][streamlit] web app that can be found on the branch [`streamlit`][streamlitBranch] in the file [`app.py`][streamlitApp] and is deployed to <https://best-sg-car-deals.herokuapp.com>. It is deployed on a free tier at Heroku, so it may load for quite some time initially since the server has to start up.
 
 Secondly, TODO: Expand upon this.
 
 
 [streamlit]: https://streamlit.io
 [mod]: https://nusmods.com/modules/CS5228/knowledge-discovery-and-data-mining
+[streamlitBranch]: https://github.com/shmulvad/kddm-project/tree/streamlit
+[streamlitApp]: https://github.com/shmulvad/kddm-project/blob/streamlit/app.py

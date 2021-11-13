@@ -36,6 +36,19 @@ def drop_bad_cols(df: pd.DataFrame) -> None:
     df.drop(const.COLS_TO_DROP, axis=1, inplace=True, errors='ignore')
 
 
+def round_to_nearest_hundred(num: int) -> int:
+    """
+    Rounds a numeric value to the nearest 100
+
+    Example:
+    >>> round_to_nearest_hundred(149.99999)
+    100
+    >>> round_to_nearest_hundred(150)
+    200
+    """
+    return int(round(num, -2))
+
+
 def get_max_squared_diff(train_df: pd.DataFrame, col: str) -> float:
     """
     Returns the squared diff of the 5th quantile and 95th quantile
@@ -73,11 +86,14 @@ def get_top_k_most_similar(sim_df, k=3000):
     """
     Gets the indices of the top k most similar rows based on a
     similarity df with the scores. If sim_df has shape (N, M)
-    then the output dataframe will have shape (N, k) where k << M
+    then the output dataframe will have shape (N, k) where k << M.
+    If k is `None`, all rows are returned.
     """
     indices = np.argsort(-sim_df, axis=1)
-    top_k = indices.iloc[:, :k]
-    return top_k
+    if k is None:
+        return indices
+
+    return indices.iloc[:, :k]
 
 
 def create_weights_df(sim_df: pd.DataFrame, top_k: pd.DataFrame,
