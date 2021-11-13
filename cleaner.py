@@ -98,7 +98,7 @@ def handle_fuel_type_using_scraped_data(df_original: pd.DataFrame) -> pd.DataFra
         return df_original
 
     with open(const.FUEL_TYPE_PATH, "r") as f:
-        listing_id_to_fuel_type = json.load(f)["fuel_type"]
+        listing_id_to_fuel_type = json.load(f)
 
     df = df_original.copy()
     fuel_type = df.listing_id.apply(lambda x: listing_id_to_fuel_type[str(x)])
