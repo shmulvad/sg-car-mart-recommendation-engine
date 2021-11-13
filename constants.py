@@ -157,8 +157,8 @@ MAKE_MODEL_BINS = [
 ]
 
 # Grid for RandomSearchCV with RandomForestRegressor
-NUM_NA_TRAIN_ITER = 250
-K_CROSS_FOLD_NA_TRAIN = 3
+NUM_NA_TRAIN_ITER = 200
+K_CROSS_FOLD_NA_TRAIN = 5
 RF_REG_RAND_GRID = {
     'n_estimators': list(np.linspace(start=200, stop=2000, num=10, dtype=int)),
     'max_depth': list(np.linspace(start=10, stop=110, num=11, dtype=int)) + [None],
