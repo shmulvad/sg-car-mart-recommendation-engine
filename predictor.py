@@ -32,6 +32,9 @@ def train_fill_ml_na(df_original: pd.DataFrame, num_iter, k_splits,
     drop_predict_cols = [col for col in predict_df.columns
                          if sum(predict_df[col].isna()) > predict_df.shape[0]*0.2]
     
+    with open('data/ml_cols_to_drop/'+target_col+'_cols.txt', "wb") as fp:
+        pickle.dump(drop_predict_cols, fp)
+
     target = df[~df[target_col].isna()].drop(drop_predict_cols, axis=1).dropna()
     
     if use_price == False:
@@ -47,8 +50,8 @@ def train_fill_ml_na(df_original: pd.DataFrame, num_iter, k_splits,
     rf_random = RandomizedSearchCV(
         estimator=rf(),
         param_distributions=const.RF_REG_RAND_GRID,
-        n_iter=const.NUM_NA_TRAIN_ITER,
-        cv=const.K_CROSS_FOLD_NA_TRAIN,
+        n_iter=num_iter,
+        cv=k_splits,
         verbose=10,
         random_state=42,
         n_jobs=-1
@@ -90,8 +93,9 @@ def fill_ml_na_col(df_original: pd.DataFrame, target_col: str, use_price=False) 
     df = df_original.copy()
     predict_df = df[df[target_col].isna()].drop([target_col], axis=1)
 
-    cols_to_drop_ml_infer =[col for col in predict_df.columns
-                         if sum(predict_df[col].isna()) > predict_df.shape[0]*0.2]
+    cols_to_drop_ml_infer = None
+    with open('data/ml_cols_to_drop/'+target_col+'_cols.txt', "rb") as fp:
+        cols_to_drop_ml_infer = pickle.load(fp)
 
     predict_df.drop(cols_to_drop_ml_infer, axis=1, inplace=True)
     predict_df.dropna(inplace=True)

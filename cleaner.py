@@ -314,3 +314,19 @@ def remove_nominal_cols(df: pd.DataFrame,
         cols_to_remove = list(set(cols_to_remove) - set(cols_to_keep))
 
     return df.drop(columns=cols_to_remove)
+
+def clean_sim_filled_data(df,is_test=False):
+    df.drop(['Unnamed: 0'],axis=1,inplace = True)
+    utils.drop_bad_cols(df)
+    df = handle_make_model(df,replace_by_bins=True)
+    df = handle_date_fields(df,is_test)
+
+    cols_to_keep: list = []
+    cols_to_remove = [col for col in const.NOMINAL_TO_REMOVE if col not in cols_to_keep]
+
+    df.drop(columns=cols_to_remove,inplace=True)
+    
+    for cols in ['type_of_vehicle','category','transmission','fuel_type','make_model']:
+        df[cols] = df[cols].astype("category")
+
+    return df
