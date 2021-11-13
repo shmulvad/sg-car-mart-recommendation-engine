@@ -67,7 +67,7 @@ def train_fill_ml_na(df_original: pd.DataFrame, num_iter, k_splits,
 
     best_rf = rf_random.best_estimator_
     best_rf.fit(X, Y)
-    filename = 'data/Models/Fill_na_models/'+target_col+'.sav'
+    filename = 'data/Fill_na_models/'+target_col+'.sav'
     pickle.dump(best_rf, open(filename, 'wb'))
 
     return error
@@ -85,7 +85,7 @@ def fill_ml_na_col(df_original: pd.DataFrame, target_col: str, use_price=False) 
     Returns:
         pd.DataFrame: Processed dataframe with filled values
     """
-    filename = 'data/Models/Fill_na_models/' + target_col + '.sav'
+    filename = 'data/Fill_na_models/' + target_col + '.sav'
     if not os.path.exists(filename):
         print(target_col + " has not been trained")
         return df_original

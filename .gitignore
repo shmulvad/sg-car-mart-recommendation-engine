@@ -3,8 +3,7 @@
 Regressor.ipynb
 preds.csv
 normalisation_data.json
-Fill_na_models_local/
-Fill_na_models_using_price/
+Models/
 Local_notebooks/
 data/test_submission*.csv
 data/most_similar*.pkl
