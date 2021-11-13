@@ -13,6 +13,7 @@ MAX_CAR_AGE = 50
 
 DATA_PATH = Path("data")
 SCRAPED_PATH = Path("scraped_data")
+INTERMEDIATE_PATH = Path("intermediate_data")
 
 TRAIN_PATH = DATA_PATH / "train.csv"
 TEST_PATH = DATA_PATH / "test.csv"
