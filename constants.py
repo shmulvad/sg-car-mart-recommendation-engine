@@ -34,6 +34,7 @@ TEXT_SORTED_FEATURES_JSON_PATH = SCRAPED_PATH / "text_features.json"
 USED_CARS_SIMPLIFIED_PATH = DATA_PATH / "sg-used-cars-final-simplified.csv"
 
 CAR_EMBEDDING_MATRIX_PATH = DATA_PATH / "car_embedding_matrix.npy"
+TITLE_TO_VEC_FILE = "data/title_to_mean_dict.npy"
 
 
 COLS_TO_DROP = [
