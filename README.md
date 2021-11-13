@@ -9,10 +9,9 @@ Our project for the module [CS5228 Knowledge Discovery and Data Mining][mod] at 
 ## TODO
 
 - [ ] I cannot find the code for the regressors. Has this been committed?
-- [ ] We have some data files in `/scraped_data` that are not actually scraped. If used, they should be moved to `/data`, otherwise deleted. Similarly, the files in `/data` that are not used anywhere should be deleted.
+- [ ] We have some data files in `/scraped_data` that are not actually scraped. If used, they should be moved to `/data`, otherwise deleted.
 - [ ] There should be some more explanation of the files in `/scraped_data`. For example, what is `train_3.tsv` and `test_3.tsv`?
 - [ ] Are we using the contents of `predictor.py` in any notebooks? I cannot find it if that is the case.
-- [ ] We should probably include the code that was used for scraping
 - [ ] `ensemble_csvs.ipynb` should be deleted if we are not using it, otherwise expanded upon below.
 
 
@@ -29,11 +28,13 @@ $ pip install -r requirements.txt
 
 ### Project Structure
 
-## Library Code
+## Data
 
-`data/` is a folder containing the raw train/test data, the same data after doing preliminary cleaning and replacing missing values using similarity approach and an embedding matrix for the cleaned train data (for use in task 2).
+`data/` is a folder containing the raw train/test data, the same data after doing preliminary cleaning and replacing missing values using similarity approach, an embedding matrix for the cleaned train data (for use in task 2) and an embedding matrix for just the titles for task 3.
 
 `scraped_data/` is a folder containing all the data that was scraped from the internet. We mainly scraped the fuel type.
+
+## Library Code
 
 `constants.py` defines a number of constants, such as the threshold for the number of NaN entries at which we deem a row not valuable to keep in our training data, the paths to different data, columns that we have determined to drop entirely, and lists of which columns are purely string columns and which are purely numerical columns.
 
@@ -48,12 +49,25 @@ $ pip install -r requirements.txt
 `predictor.py` TODO
 
 
+## Generator Code
+
+Our generator code is included for reproducibility. It generates the data we have and is set up as Python scripts that can be executed directly by running `python [FILE.py]` (given the environment is set up correctly). They may take a long time to run, but in the end, they will produce the data mentioned.
+
+`generate_sim_df.py` generates the similarity dataframes for the train and test data and new CSV files where the missing numerical values have been replaced.
+
+`generate_sentence_embeddings.py` generates the sentence embedding matrices that are used in respectively task 2 and task 3.
+
+`scraper.py` scrapes sgCarMart for car codes, sub codes and fuel type.
 
 ## Notebooks
 
 `eda.ipynb` contains the code that was used for doing exploratory data analysis and the code to generate the plots we include in our report.
 
-`task2.ipynb` implements and presents the recommender system. Note that a sentence transformer model is used which may take some time to download a model.
+`task1_regressor.ipynb` TODO
+
+`task2_recommender.ipynb` implements and presents the recommender system. Note that a sentence transformer model is used which may take some time to download a model.
+
+`task3_car_finder.ipynb` implements and presents the system we have that can search for car listings based on a textual search query.
 
 
 
@@ -64,7 +78,7 @@ TODO: Expand upon this.
 
 ### Task 2 - Recommendation of Similar Rows
 
-Our entry point for Task 2, recommendations for similar rows, can be found in `task2.ipynb`. Important supplementary files for task 2 if one has an interest in diving deeper into the code are `similarity.py`, `sim_func.py` and `item_filters.py`.
+Our entry point for Task 2, recommendations for similar rows, can be found in `task2.ipynb`. Important supplementary files for task 2 if one has an interest in diving deeper into the code are `similarity.py`, `sim_func.py`, `item_filters.py` and `generate_sentence_embeddings.py`.
 
 
 ### Task 3 - General
@@ -73,7 +87,7 @@ Task 3 is implemented in a two-fold manner.
 
 First, there is a [Streamlit][streamlit] web app that can be found on the branch [`streamlit`][streamlitBranch] in the file [`app.py`][streamlitApp] and is deployed to <https://best-sg-car-deals.herokuapp.com>. It is deployed on a free tier at Heroku, so it may load for quite some time initially since the server has to start up.
 
-Secondly, TODO: Expand upon this.
+Secondly, we have the car finder in `task3_car_finder.ipynb` that searches for car titles where the features or other values match a textual description given as a query by the user.
 
 
 [streamlit]: https://streamlit.io

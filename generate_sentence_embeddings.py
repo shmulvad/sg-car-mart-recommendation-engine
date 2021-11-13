@@ -51,7 +51,7 @@ def get_mean_embeddings(sentence_dict: SentenceDict,
     of a numpy array of mean embeddings and a dictionary mapping indices to
     titles.
     """
-    # Create title to mean embedding of all instances within a title
+    # Create title to mean embedding of all instances with same title
     title_to_mean_dict = {}
     for title, sentences in tqdm(sentence_dict.items()):
         embeddings = np.mean(encoder.encode(sentences), axis=0)
