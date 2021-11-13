@@ -8,14 +8,10 @@ Our project for the module [CS5228 Knowledge Discovery and Data Mining][mod] at 
 
 ## TODO
 
-- [ ] We have a weird folder called `0_dev`. I am not really sure what the two notebooks in there do. Looks like they might be related to cleaning before we unified the cleaning methods? If that's the case, it should be deleted.
 - [ ] I cannot find the code for the regressors. Has this been committed?
-- [ ] We have data files in `/data`, `/scraped_data`, `/task1` and `/task1/data`.
-- [ ] What is the point of all the files in `/scraped_data/cols_to_drop`? They look very weird on my end.
+- [ ] We have some data files in `/scraped_data` that are not actually scraped. If used, they should be moved to `/data`, otherwise deleted. Similarly, the files in `/data` that are not used anywhere should be deleted.
 - [ ] There should be some more explanation of the files in `/scraped_data`. For example, what is `train_3.tsv` and `test_3.tsv`?
 - [ ] Are we using the contents of `predictor.py` in any notebooks? I cannot find it if that is the case.
-- [ ] `dl.py` is extremely unreadable. There are many variables that are undefined, there is no documentation, etc. In general, it deviates a lot from the remaining codebase.
-- [x] Maybe we should move the Streamlit app to a separate repo. Often, the Heroku deployment may fail due to a lot of large files or installs that actually aren't needed for Streamlit. If so, then we can also remove files like `Procfile`, `setup.sh`, etc.
 - [ ] We should probably include the code that was used for scraping
 - [ ] `ensemble_csvs.ipynb` should be deleted if we are not using it, otherwise expanded upon below.
 
@@ -49,15 +45,13 @@ $ pip install -r requirements.txt
 
 `item_filters.py` defines code that is used for task 2 for filtering items based on whether certain criteria are met.
 
-`dl.py` TODO
+`predictor.py` TODO
 
 
 
 ## Notebooks
 
 `eda.ipynb` contains the code that was used for doing exploratory data analysis and the code to generate the plots we include in our report.
-
-`predictor.py` TODO
 
 `task2.ipynb` implements and presents the recommender system. Note that a sentence transformer model is used which may take some time to download a model.
 
