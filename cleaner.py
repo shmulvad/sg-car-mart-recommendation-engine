@@ -330,3 +330,31 @@ def clean_sim_filled_data(df,is_test=False):
         df[cols] = df[cols].astype("category")
 
     return df
+
+def baseline_cleaner(df_original,lgbm_encode = True,is_test = False):
+    df = df_original.copy()
+    df.drop(['listing_id','title','description','original_reg_date','reg_date',
+         'fuel_type','opc_scheme','lifespan','eco_category','features',
+             'accessories','indicative_price'],axis=1,inplace=True)
+    if lgbm_encode:
+        for col in ['type_of_vehicle', 'category', 'transmission', 'make', 'model']:
+            df[col] = df[col].astype("category")
+    else:
+        df.drop(['make','model'],axis=1,inplace = True)
+        df.transmission = df.transmission.map(const.TRANSMISSION_MAP)
+        df.type_of_vehicle = df.type_of_vehicle.apply(vehicle_type_to_cat_num)
+        df.category = df.category.apply(string_to_set)
+
+        mlb = MultiLabelBinarizer()
+        binary_cats = mlb.fit_transform(df.category)
+        cols = [col.replace(" ", "_") for col in mlb.classes_]
+        binary_cats_df = pd.DataFrame(binary_cats, columns=cols)
+        binary_cats_df.drop(["electric_cars", "hybrid_cars"], axis=1, inplace=True)
+        binary_cats_df.rename(columns={"-": "missing_category"}, inplace=True)
+        df = pd.concat([df, binary_cats_df], axis=1)
+        df.drop(columns=["missing_category", "category"], inplace=True)
+        if is_test:
+            df.fillna(df.mean(),inplace = True)
+        else:
+            df.dropna(inplace=True)
+    return df
