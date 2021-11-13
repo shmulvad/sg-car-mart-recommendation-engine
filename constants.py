@@ -24,6 +24,7 @@ MOST_SIMILIAR_TEST_PATH = DATA_PATH / "most_similar_test.pkl"
 SIM_REPLACED_TRAIN = DATA_PATH / "train_sim_filled.csv"
 SIM_REPLACED_TEST = DATA_PATH / "test_sim_filled.csv"
 
+CAR_CODE_PATH = SCRAPED_PATH/ "listing_carcode.csv"
 FUEL_TYPE_PATH = SCRAPED_PATH / "listing_id_to_fuel_type.json"
 MAKE_DICT_PATH = SCRAPED_PATH / "make_dict.pkl"
 MAKE_MODEL_BIN_PATH = SCRAPED_PATH / "make_model_bins.pkl"
@@ -34,7 +35,7 @@ TEXT_SORTED_FEATURES_JSON_PATH = SCRAPED_PATH / "text_features.json"
 USED_CARS_SIMPLIFIED_PATH = DATA_PATH / "sg-used-cars-final-simplified.csv"
 
 CAR_EMBEDDING_MATRIX_PATH = DATA_PATH / "car_embedding_matrix.npy"
-TITLE_TO_VEC_FILE = "data/title_to_mean_dict.npy"
+TITLE_EMBEDDING_DICT_PATH = DATA_PATH / "title_embedding_dict.npy"
 
 
 COLS_TO_DROP = [
@@ -96,6 +97,13 @@ NOMINAL_TO_REMOVE = [
     "opc_scheme",
 ]
 
+DESCRIPTION_COLS = [
+    'title',
+    'description',
+    'features',
+    'accessories'
+]
+
 TO_SKIP = {
     "listing_id",
     "description",
@@ -149,20 +157,13 @@ MAKE_MODEL_BINS = [
 ]
 
 # Grid for RandomSearchCV with RandomForestRegressor
-# TODO: I think it is more suitable to put these into the relevant notebook
-n_estimators = list(np.linspace(start=200, stop=2000, num=10, dtype=int))
-max_depth = list(np.linspace(start=10, stop=110, num=11, dtype=int))
-max_features = ['auto', 'sqrt']
-max_depth.append(None)
-min_samples_split = [2, 5, 10]
-min_samples_leaf = [1, 2, 4]
-bootstrap = [True, False]
-RF_REG_RAND_GRID = {'n_estimators': n_estimators,
-                    'max_features': max_features,
-                    'max_depth': max_depth,
-                    'min_samples_split': min_samples_split,
-                    'min_samples_leaf': min_samples_leaf,
-                    'bootstrap': bootstrap}
-
-NUM_NA_TRAIN_ITER = 200
-K_CROSS_FOLD_NA_TRAIN = 5
+NUM_NA_TRAIN_ITER = 250
+K_CROSS_FOLD_NA_TRAIN = 3
+RF_REG_RAND_GRID = {
+    'n_estimators': list(np.linspace(start=200, stop=2000, num=10, dtype=int)),
+    'max_depth': list(np.linspace(start=10, stop=110, num=11, dtype=int)) + [None],
+    'max_features': ['auto', 'sqrt'],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4],
+    'bootstrap': [True, False]
+}

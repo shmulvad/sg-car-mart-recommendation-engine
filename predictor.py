@@ -1,11 +1,10 @@
+import os
+import pickle
 
 import pandas as pd
-import pickle
-import os
-from sklearn.model_selection import RandomizedSearchCV
-from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_absolute_error, f1_score
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from sklearn.metrics import f1_score, mean_absolute_error
+from sklearn.model_selection import RandomizedSearchCV, train_test_split
 
 import constants as const
 
@@ -44,12 +43,16 @@ def train_fill_ml_na(df_original: pd.DataFrame, num_iter, k_splits,
     Y = target[target_col]
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.15, random_state=42)
 
-    rf = RandomForestRegressor()
-    if regressor == False:
-        rf = RandomForestClassifier()
-    rf_random = RandomizedSearchCV(estimator=rf, param_distributions=const.RF_REG_RAND_GRID,
-                                   n_iter=num_iter, cv=k_splits, verbose=10,
-                                   random_state=42, n_jobs=-1)
+    rf = RandomForestRegressor if regressor else RandomForestClassifier
+    rf_random = RandomizedSearchCV(
+        estimator=rf(),
+        param_distributions=const.RF_REG_RAND_GRID,
+        n_iter=const.NUM_NA_TRAIN_ITER,
+        cv=const.K_CROSS_FOLD_NA_TRAIN,
+        verbose=10,
+        random_state=42,
+        n_jobs=-1
+    )
     rf_random.fit(X_train, y_train)
 
     pred = rf_random.predict(X_test)
