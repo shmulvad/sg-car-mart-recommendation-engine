@@ -7,7 +7,7 @@ Our project for the module [CS5228 Knowledge Discovery and Data Mining][mod] at 
 
 ### Getting Started
 
-Make sure you have Python installed. The code should work on Python 3.8+. Then just run the following and you should be good to go!
+Make sure you have Python 3.8+ installed. Then just run the following and you should be good to go!
 
 ```bash
 # We set clone depth to 1 so prior data files are not downloaded
