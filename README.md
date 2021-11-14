@@ -7,13 +7,9 @@ Our project for the module [CS5228 Knowledge Discovery and Data Mining][mod] at 
 
 
 ## TODO
-
-- [ ] I cannot find the code for the regressors. Has this been committed?
 - [ ] Add code for filling data using similarity in Task 1 Approach 2 notebook
-- [ ] We have some data files in `/scraped_data` that are not actually scraped. If used, they should be moved to `/data`, otherwise deleted.
 - [ ] There should be some more explanation of the files in `/scraped_data`. For example, what is `train_3.tsv` and `test_3.tsv`?
-- [ ] Are we using the contents of `predictor.py` in any notebooks? I cannot find it if that is the case.
-- [ ] `ensemble_csvs.ipynb` should be deleted if we are not using it, otherwise expanded upon below.
+
 
 
 ### Getting Started
