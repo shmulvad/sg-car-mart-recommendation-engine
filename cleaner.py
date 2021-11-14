@@ -318,7 +318,7 @@ def to_categorical_for_cols(df: pd.DataFrame) -> pd.DataFrame:
     binary_cats = mlb.fit_transform(df.category)
     cols = [col.replace(" ", "_") for col in mlb.classes_]
     binary_cats_df = pd.DataFrame(binary_cats, columns=cols)
-    binary_cats_df.drop(["electric_cars", "hybrid_cars"], axis=1, inplace=True)
+    binary_cats_df.drop(["electric_cars", "hybrid_cars"], axis=1, inplace=True, errors='ignore')
     binary_cats_df.rename(columns={"-": "missing_category"}, inplace=True)
 
     df.drop(columns=["fuel_type", "category"], inplace=True)
@@ -349,15 +349,8 @@ def clean_sim_filled_data(df, is_test=False):
     cols_to_remove = [col for col in const.NOMINAL_TO_REMOVE if col not in cols_to_keep]
 
     df.drop(columns=cols_to_remove, inplace=True)
-
-    for cols in [
-        "type_of_vehicle",
-        "category",
-        "transmission",
-        "fuel_type",
-        "make_model",
-    ]:
-        df[cols] = df[cols].astype("category")
+    df.category = df.category.apply(lambda x:eval(x))
+    df = to_categorical_for_cols(df)
 
     return df
 
