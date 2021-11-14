@@ -6,10 +6,6 @@ import similarity as sim
 
 
 def main():
-    if not const.GENERATE_SIM_DF:
-        print('Are you sure you want to do this? If so, set GENERATE_SIM_DF=True')
-        exit(0)
-
     # Read data and run cleaner
     df_train_raw = pd.read_csv(const.TRAIN_PATH)
     df_test_raw = pd.read_csv(const.TEST_PATH)
