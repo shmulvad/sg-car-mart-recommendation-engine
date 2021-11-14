@@ -80,9 +80,9 @@ Our generator code is included for reproducibility. It generates the data we hav
 
 Task1 has been sub-divided into 3 notebooks corresponding to the 3 approaches that our report mentions. The notebooks are self-explanatory.
 
-Approach 1 shows the working of a basic regressor setup on naive data cleaned dataset.
-Approach 2 highlights the over-engineering situation that ml-filled/similarity-filled datasets suffer from. One can run the data-filling setup using code-cells. Alternatively, we provide loading of filled data to show the prime objective - the over-fit solution.
-Approach 3 expands on using naive data with directed pre-processing and using LightGBM or CatBoost Regressor.
+* Approach 1 shows the working of a basic regressor setup on naive data cleaned dataset.
+* Approach 2 highlights the over-engineering situation that ml-filled/similarity-filled datasets suffer from. One can run the data-filling setup using code-cells. Alternatively, we provide loading of filled data to show the prime objective - the over-fit solution.
+* Approach 3 expands on using naive data with directed pre-processing and using LightGBM or CatBoost Regressor.
 
 
 
