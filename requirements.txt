@@ -8,3 +8,5 @@ sentence-transformers==2.1.0
 httpx==0.20.0
 beautifulsoup4==4.10.0
 tqdm==4.62.3
+lightgbm==3.3.1
+catboost==1.0.3
