@@ -5,6 +5,12 @@ Our project for the module [CS5228 Knowledge Discovery and Data Mining][mod] at 
 * **Team**: All That Data
 * **Group members**: Soeren Hougaard Mulvad, Kanav Sabharwal, Saurabh Jain, Sai Dhawal Phaye
 
+
+### Quick Note Regarding Task 2
+
+If any problems occur trying to run task 2 locally, [this version hosted at Google Colab][colab] can be run instead.
+
+
 ### Getting Started
 
 Make sure you have Python 3.8+ installed. Then just run the following and you should be good to go!
@@ -68,7 +74,7 @@ Task1 has been sub-divided into 3 notebooks corresponding to the 3 approaches th
 
 ### Task 2 - Recommendation of Similar Rows
 
-Our entry point for Task 2, recommendations for similar rows, can be found in `notebooks/task2_recommender.ipynb`. Important supplementary files for task 2 if one has an interest in diving deeper into the code are `similarity.py`, `sim_func.py`, `item_filters.py` and `generate_sentence_embeddings.py`.
+Our entry point for Task 2, recommendations for similar rows, can be found in `notebooks/task2_recommender.ipynb` (or [Google Colab][colab]). Important supplementary files for task 2 if one has an interest in diving deeper into the code are `similarity.py`, `sim_func.py`, `item_filters.py` and `generate_sentence_embeddings.py`.
 
 
 ### Task 3 - General
@@ -84,3 +90,4 @@ Secondly, we have the car finder in `notebooks/task3_car_finder.ipynb` that sear
 [mod]: https://nusmods.com/modules/CS5228/knowledge-discovery-and-data-mining
 [streamlitBranch]: https://github.com/shmulvad/kddm-project/tree/streamlit
 [streamlitApp]: https://github.com/shmulvad/kddm-project/blob/streamlit/app.py
+[colab]: https://colab.research.google.com/drive/1jsVK6iWu78BEwGA7fJ731-H2UsEt47eY?usp=sharing
