@@ -60,6 +60,7 @@ def handle_fuel_type_using_other_cols(df_original: pd.DataFrame) -> pd.DataFrame
     """
     Tries to clean fuel type based on the description and features
     """
+
     def helper(row: pd.Series) -> str:
         if isinstance(row.fuel_type, str) and row.fuel_type:
             return row.fuel_type
@@ -208,9 +209,13 @@ def handle_make_model(df_original: pd.DataFrame, replace_by_bins=False) -> pd.Da
     df = df_original.copy()
     splitted_titles = df.title.apply(str.lower).str.split(" |-")
     df.make = splitted_titles.str[0]
-    df['make_model'] = df.apply(lambda x: x['make']+' '+x['model'], axis=1)
+    df["make_model"] = df.apply(lambda x: x["make"] + " " + x["model"], axis=1)
 
-    path = const.MAKE_MODEL_BIN_PATH if replace_by_bins else const.MAKE_MODEL_DICT_MEAN_PATH
+    path = (
+        const.MAKE_MODEL_BIN_PATH
+        if replace_by_bins
+        else const.MAKE_MODEL_DICT_MEAN_PATH
+    )
     with open(path, "rb") as f:
         make_model_dict = pickle.load(f)
 
@@ -218,11 +223,16 @@ def handle_make_model(df_original: pd.DataFrame, replace_by_bins=False) -> pd.Da
 
     return df
 
-def new_clean(df,is_test=False):
+
+def new_clean(df, is_test=False, is_catboost=False):
+    df = df.copy()
+    
     utils.drop_bad_cols(df)
-    df = handle_make_model(df,replace_by_bins=True)
-    df = handle_date_fields(df,is_test)
+    df = handle_make_model(df, replace_by_bins=True)
+
+    df = handle_date_fields(df, is_test)
     intersect_cols = set(df.columns) & set(const.STR_COLS)
+
     for str_col in intersect_cols:
         df[str_col] = df[str_col].apply(nan_to_str_fallback)
 
@@ -233,18 +243,30 @@ def new_clean(df,is_test=False):
         df = handle_fuel_type(df)
 
     df.drop(columns=const.NOMINAL_TO_REMOVE, inplace=True)
-    df.drop(['arf', 'road_tax', 'dereg_value', 'depreciation'], axis=1, inplace=True)
 
-    for col in ['type_of_vehicle', 'category', 'transmission', 'fuel_type', 'make_model']:
+    if not is_catboost:
+        df.drop(
+            ["arf", "road_tax", "dereg_value", "depreciation"], axis=1, inplace=True
+        )
+
+    for col in [
+        "type_of_vehicle",
+        "category",
+        "transmission",
+        "fuel_type",
+        "make_model",
+    ]:
         df[col] = df[col].astype("category")
+    
+    if is_catboost:
+        df.drop(["make_model"], axis=1, inplace=True)
 
     df.mileage = df.mileage.apply(np.log)
     df.engine_cap = df.engine_cap.apply(np.square)
     return df
 
 
-def clean_preliminary(df_original: pd.DataFrame,
-                      is_test: bool = False) -> pd.DataFrame:
+def clean_preliminary(df_original: pd.DataFrame, is_test: bool = False) -> pd.DataFrame:
     """
     Runs the preliminary cleaning on the df before we start finding
     similarities.
@@ -303,8 +325,9 @@ def to_categorical_for_cols(df: pd.DataFrame) -> pd.DataFrame:
     return pd.concat([df, fuel_type_dummies, binary_cats_df], axis=1)
 
 
-def remove_nominal_cols(df: pd.DataFrame,
-                        cols_to_keep: Optional[List[str]] = None) -> pd.DataFrame:
+def remove_nominal_cols(
+    df: pd.DataFrame, cols_to_keep: Optional[List[str]] = None
+) -> pd.DataFrame:
     """
     Removes nominal columns that don't impart any useful information
     except the columns provided by the user
@@ -315,32 +338,55 @@ def remove_nominal_cols(df: pd.DataFrame,
 
     return df.drop(columns=cols_to_remove)
 
-def clean_sim_filled_data(df,is_test=False):
-    df.drop(['Unnamed: 0'],axis=1,inplace = True)
+
+def clean_sim_filled_data(df, is_test=False):
+    df.drop(["Unnamed: 0"], axis=1, inplace=True)
     utils.drop_bad_cols(df)
-    df = handle_make_model(df,replace_by_bins=True)
-    df = handle_date_fields(df,is_test)
+    df = handle_make_model(df, replace_by_bins=True)
+    df = handle_date_fields(df, is_test)
 
     cols_to_keep: list = []
     cols_to_remove = [col for col in const.NOMINAL_TO_REMOVE if col not in cols_to_keep]
 
-    df.drop(columns=cols_to_remove,inplace=True)
-    
-    for cols in ['type_of_vehicle','category','transmission','fuel_type','make_model']:
+    df.drop(columns=cols_to_remove, inplace=True)
+
+    for cols in [
+        "type_of_vehicle",
+        "category",
+        "transmission",
+        "fuel_type",
+        "make_model",
+    ]:
         df[cols] = df[cols].astype("category")
 
     return df
 
-def baseline_cleaner(df_original,lgbm_encode = True,is_test = False):
+
+def baseline_cleaner(df_original, lgbm_encode=True, is_test=False):
     df = df_original.copy()
-    df.drop(['listing_id','title','description','original_reg_date','reg_date',
-         'fuel_type','opc_scheme','lifespan','eco_category','features',
-             'accessories','indicative_price'],axis=1,inplace=True)
+    df.drop(
+        [
+            "listing_id",
+            "title",
+            "description",
+            "original_reg_date",
+            "reg_date",
+            "fuel_type",
+            "opc_scheme",
+            "lifespan",
+            "eco_category",
+            "features",
+            "accessories",
+            "indicative_price",
+        ],
+        axis=1,
+        inplace=True,
+    )
     if lgbm_encode:
-        for col in ['type_of_vehicle', 'category', 'transmission', 'make', 'model']:
+        for col in ["type_of_vehicle", "category", "transmission", "make", "model"]:
             df[col] = df[col].astype("category")
     else:
-        df.drop(['make','model'],axis=1,inplace = True)
+        df.drop(["make", "model"], axis=1, inplace=True)
         df.transmission = df.transmission.map(const.TRANSMISSION_MAP)
         df.type_of_vehicle = df.type_of_vehicle.apply(vehicle_type_to_cat_num)
         df.category = df.category.apply(string_to_set)
@@ -354,7 +400,7 @@ def baseline_cleaner(df_original,lgbm_encode = True,is_test = False):
         df = pd.concat([df, binary_cats_df], axis=1)
         df.drop(columns=["missing_category", "category"], inplace=True)
         if is_test:
-            df.fillna(df.mean(),inplace = True)
+            df.fillna(df.mean(), inplace=True)
         else:
             df.dropna(inplace=True)
     return df
