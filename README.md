@@ -8,7 +8,6 @@ Our project for the module [CS5228 Knowledge Discovery and Data Mining][mod] at 
 
 ## TODO
 - [ ] Add code for filling data using similarity in Task 1 Approach 2 notebook
-- [ ] Add description to predictor.py
 - [ ] Contributions table and Conclusion in Overleaf
 - [ ] Update requirements.txt for all models we use
 
@@ -45,7 +44,7 @@ $ pip install -r requirements.txt
 
 `item_filters.py` defines code that is used for task 2 for filtering items based on whether certain criteria are met.
 
-`predictor.py` TODO
+`predictor.py` defines code that is used to train and infer Machine Learning models for filling missing values in the dataset 
 
 
 ### Generator Code
