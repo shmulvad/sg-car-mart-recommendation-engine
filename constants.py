@@ -97,12 +97,7 @@ NOMINAL_TO_REMOVE = [
     "opc_scheme",
 ]
 
-DESCRIPTION_COLS = [
-    'title',
-    'description',
-    'features',
-    'accessories'
-]
+INFO_COLS = ['title', 'accessories', 'features']
 
 TO_SKIP = {
     "listing_id",

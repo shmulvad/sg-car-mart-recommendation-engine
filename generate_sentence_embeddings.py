@@ -21,7 +21,7 @@ def preprocess_title(title: str) -> str:
 
 def get_description_sentence(row: pd.Series) -> str:
     """Return the description sentence given by a row"""
-    mappings = [str(row[col]) for col in const.DESCRIPTION_COLS
+    mappings = [f'{col} is {row[col]}' for col in const.INFO_COLS
                 if row[col] and row[col] != const.UNKNOWN_STR]
     return ', '.join(mappings)
 
