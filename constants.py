@@ -2,8 +2,6 @@ from pathlib import Path
 
 import numpy as np
 
-GENERATE_SIM_DF = False
-
 UNKNOWN_STR = "UNKNOWN"
 
 MAX_NUM_NANS = 8
@@ -12,30 +10,32 @@ NAN_PENALTY = 0.01
 MAX_CAR_AGE = 50
 
 DATA_PATH = Path("data")
-SCRAPED_PATH = Path("scraped_data")
+CSV_PREDS_OUT = Path("preds.csv")
 
 TRAIN_PATH = DATA_PATH / "train.csv"
 TEST_PATH = DATA_PATH / "test.csv"
-CSV_PREDS_OUT = Path("preds.csv")
+USED_CARS_SIMPLIFIED_PATH = DATA_PATH / "sg-used-cars-final-simplified.csv"
 
 MOST_SIMILIAR_TRAIN_PATH = DATA_PATH / "most_similar_train.pkl"
 MOST_SIMILIAR_TEST_PATH = DATA_PATH / "most_similar_test.pkl"
 
-SIM_REPLACED_TRAIN = DATA_PATH / "train_sim_filled.csv"
-SIM_REPLACED_TEST = DATA_PATH / "test_sim_filled.csv"
-
-CAR_CODE_PATH = SCRAPED_PATH/ "listing_carcode.csv"
-FUEL_TYPE_PATH = SCRAPED_PATH / "listing_id_to_fuel_type.json"
-MAKE_DICT_PATH = DATA_PATH / "Make_model_dictionaries/make_dict.pkl"
-MAKE_MODEL_BIN_PATH = DATA_PATH / "Make_model_dictionaries/make_model_bins.pkl"
-MAKE_MODEL_DICT_MEAN_PATH = DATA_PATH / "Make_model_dictionaries/make_dict_mean_norm.pkl"
-TEXT_PROCESS_TRAIN_PATH = SCRAPED_PATH / "train_3.tsv"
-TEXT_PROCESS_TEST_PATH = SCRAPED_PATH / "test_3.tsv"
-TEXT_SORTED_FEATURES_JSON_PATH = SCRAPED_PATH / "text_features.json"
-USED_CARS_SIMPLIFIED_PATH = DATA_PATH / "sg-used-cars-final-simplified.csv"
-
 CAR_EMBEDDING_MATRIX_PATH = DATA_PATH / "car_embedding_matrix.npy"
 TITLE_EMBEDDING_DICT_PATH = DATA_PATH / "title_embedding_dict.npy"
+
+FILLED_PATH = DATA_PATH / "Filled_df"
+SIM_REPLACED_TRAIN = FILLED_PATH / "train_sim_filled.csv"
+SIM_REPLACED_TEST = FILLED_PATH / "test_sim_filled.csv"
+ML_REPLACED_TRAIN = FILLED_PATH / "train_ML_filled.csv"
+ML_REPLACED_TEST = FILLED_PATH / "test_ML_filled.csv"
+
+MAKE_MODEL_PATH = DATA_PATH / "Make_model_dictionaries"
+MAKE_DICT_PATH = MAKE_MODEL_PATH / "make_dict.pkl"
+MAKE_MODEL_BIN_PATH = MAKE_MODEL_PATH / "make_model_bins.pkl"
+MAKE_MODEL_DICT_MEAN_PATH = MAKE_MODEL_PATH / "make_dict_mean_norm.pkl"
+
+SCRAPED_PATH = Path("scraped_data")
+CAR_CODE_PATH = SCRAPED_PATH / "listing_carcode.csv"
+FUEL_TYPE_PATH = SCRAPED_PATH / "listing_id_to_fuel_type.json"
 
 
 COLS_TO_DROP = [

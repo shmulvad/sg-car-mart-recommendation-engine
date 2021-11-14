@@ -5,13 +5,6 @@ Our project for the module [CS5228 Knowledge Discovery and Data Mining][mod] at 
 * **Team**: All That Data
 * **Group members**: Soeren Hougaard Mulvad, Kanav Sabharwal, Saurabh Jain, Sai Dhawal Phaye
 
-
-## TODO
-- [ ] Add code for filling data using similarity in Task 1 Approach 2 notebook
-- [ ] Contributions table and Conclusion in Overleaf
-- [ ] Update requirements.txt for all models we use
-
-
 ### Getting Started
 
 Make sure you have Python installed. The code should work on Python 3.8+. Then just run the following and you should be good to go!
