@@ -32,7 +32,7 @@ def train_fill_ml_na(df_original: pd.DataFrame, num_iter, k_splits,
     drop_predict_cols = [col for col in predict_df.columns
                          if sum(predict_df[col].isna()) > predict_df.shape[0]*0.2]
     
-    with open('data/ml_cols_to_drop/'+target_col+'_cols.txt', "wb") as fp:
+    with open('data/ml_cols_to_drop/'+target_col+'_cols.pkl', "wb") as fp:
         pickle.dump(drop_predict_cols, fp)
 
     target = df[~df[target_col].isna()].drop(drop_predict_cols, axis=1).dropna()
@@ -87,14 +87,14 @@ def fill_ml_na_col(df_original: pd.DataFrame, target_col: str, use_price=False) 
     """
     filename = 'data/Fill_na_models/' + target_col + '.sav'
     if not os.path.exists(filename):
-        print(target_col + " has not been trained")
+        # print(target_col + " has not been trained")
         return df_original
 
     df = df_original.copy()
     predict_df = df[df[target_col].isna()].drop([target_col], axis=1)
 
     cols_to_drop_ml_infer = None
-    with open('data/ml_cols_to_drop/'+target_col+'_cols.txt', "rb") as fp:
+    with open('data/ml_cols_to_drop/'+target_col+'_cols.pkl', "rb") as fp:
         cols_to_drop_ml_infer = pickle.load(fp)
 
     predict_df.drop(cols_to_drop_ml_infer, axis=1, inplace=True)
