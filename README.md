@@ -8,8 +8,8 @@ Our project for the module [CS5228 Knowledge Discovery and Data Mining][mod] at 
 
 ## TODO
 - [ ] Add code for filling data using similarity in Task 1 Approach 2 notebook
-- [ ] There should be some more explanation of the files in `/scraped_data`. For example, what is `train_3.tsv` and `test_3.tsv`?
--  [ ] Add description to predictor.py
+- [ ] Add description to predictor.py
+- [ ] Contributions table and Conclusion in Overleaf
 
 
 ### Getting Started
