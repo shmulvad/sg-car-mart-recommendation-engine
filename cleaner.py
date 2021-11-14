@@ -318,7 +318,8 @@ def to_categorical_for_cols(df: pd.DataFrame) -> pd.DataFrame:
     binary_cats = mlb.fit_transform(df.category)
     cols = [col.replace(" ", "_") for col in mlb.classes_]
     binary_cats_df = pd.DataFrame(binary_cats, columns=cols)
-    binary_cats_df.drop(["electric_cars", "hybrid_cars"], axis=1, inplace=True)
+    if "electric_cars" in cols:
+        binary_cats_df.drop(["electric_cars", "hybrid_cars"], axis=1, inplace=True)
     binary_cats_df.rename(columns={"-": "missing_category"}, inplace=True)
 
     df.drop(columns=["fuel_type", "category"], inplace=True)
