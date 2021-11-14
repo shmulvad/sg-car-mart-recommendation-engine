@@ -64,7 +64,11 @@ Our generator code is included for reproducibility. It generates the data we hav
 
 `eda.ipynb` contains the code that was used for doing exploratory data analysis and the code to generate the plots we include in our report.
 
-`task1_regressor.ipynb` TODO
+`task1_approach1.ipynb` implements the baseline regressor over naive data with minimal pre-processing and gives a baseline RMSE score
+
+`task1_approach2.ipynb` implements the LightGBM regressor over ml-filled and similarity filled data 
+
+`task1_approach3.ipynb` implements the LightGBM and CatBoost regressors over naive data cleaned with directed pre-processing
 
 `task2_recommender.ipynb` implements and presents the recommender system. Note that a sentence transformer model is used which may take some time to download a model.
 
