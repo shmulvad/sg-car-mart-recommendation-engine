@@ -10,6 +10,7 @@ Our project for the module [CS5228 Knowledge Discovery and Data Mining][mod] at 
 - [ ] Add code for filling data using similarity in Task 1 Approach 2 notebook
 - [ ] Add description to predictor.py
 - [ ] Contributions table and Conclusion in Overleaf
+- [ ] Update requirements.txt for all models we use
 
 
 ### Getting Started
