@@ -23,15 +23,16 @@ $ cd kddm-project
 $ pip install -r requirements.txt
 ```
 
-### Project Structure
 
-## Data
+## Project Structure
+
+### Data
 
 `data/` is a folder containing the raw train/test data, the same data after doing preliminary cleaning and replacing missing values using similarity approach, an embedding matrix for the cleaned train data (for use in task 2) and an embedding matrix for just the titles for task 3.
 
 `scraped_data/` is a folder containing all the data that was scraped from the internet. We mainly scraped the fuel type.
 
-## Library Code
+### Library Code
 
 `constants.py` defines a number of constants, such as the threshold for the number of NaN entries at which we deem a row not valuable to keep in our training data, the paths to different data, columns that we have determined to drop entirely, and lists of which columns are purely string columns and which are purely numerical columns.
 
@@ -46,7 +47,7 @@ $ pip install -r requirements.txt
 `predictor.py` TODO
 
 
-## Generator Code
+### Generator Code
 
 Our generator code is included for reproducibility. It generates the data we have and is set up as Python scripts that can be executed directly by running `python [FILE.py]` (given the environment is set up correctly). They may take a long time to run, but in the end, they will produce the data mentioned.
 
@@ -56,7 +57,7 @@ Our generator code is included for reproducibility. It generates the data we hav
 
 `scraper.py` scrapes sgCarMart for car codes, sub codes and fuel type.
 
-## Notebooks
+### Notebooks
 
 `eda.ipynb` contains the code that was used for doing exploratory data analysis and the code to generate the plots we include in our report.
 
@@ -71,6 +72,7 @@ Our generator code is included for reproducibility. It generates the data we hav
 `task3_car_finder.ipynb` implements and presents the system we have that can search for car listings based on a textual search query.
 
 
+## Tasks
 
 ### Task 1 - Regression of Car Resale Price
 
@@ -79,7 +81,6 @@ Task1 has been sub-divided into 3 notebooks corresponding to the 3 approaches th
 * `task1_approach1.ipynb`: Approach 1 shows the working of a basic regressor setup on naive data cleaned dataset.
 * `task1_approach2.ipynb`: Approach 2 highlights the over-engineering situation that ml-filled/similarity-filled datasets suffer from. One can run the data-filling setup using code-cells. Alternatively, we provide loading of filled data to show the prime objective - the over-fit solution.
 * `task1_approach3.ipynb`: Approach 3 expands on using naive data with directed pre-processing and using LightGBM or CatBoost Regressor.
-
 
 
 ### Task 2 - Recommendation of Similar Rows
