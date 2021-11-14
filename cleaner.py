@@ -3,6 +3,7 @@ import pickle
 import re
 from datetime import datetime
 from typing import List, Optional, Set
+import warnings
 
 import numpy as np
 import pandas as pd
@@ -206,27 +207,34 @@ def handle_make_model(df_original: pd.DataFrame, replace_by_bins=False) -> pd.Da
     if "title" not in df_original or "make" not in df_original:
         return df_original
 
-    df = df_original.copy()
-    splitted_titles = df.title.apply(str.lower).str.split(" |-")
-    df.make = splitted_titles.str[0]
-    df["make_model"] = df.apply(lambda x: x["make"] + " " + x["model"], axis=1)
+    try:
+        df = df_original.copy()
+        splitted_titles = df.title.apply(str.lower).str.split(" |-")
+        df.make = splitted_titles.str[0]
+        df["make_model"] = df.apply(lambda x: x["make"] + " " + x["model"], axis=1)
 
-    path = (
-        const.MAKE_MODEL_BIN_PATH
-        if replace_by_bins
-        else const.MAKE_MODEL_DICT_MEAN_PATH
-    )
-    with open(path, "rb") as f:
-        make_model_dict = pickle.load(f)
+        path = (
+            const.MAKE_MODEL_BIN_PATH
+            if replace_by_bins
+            else const.MAKE_MODEL_DICT_MEAN_PATH
+        )
+        with open(path, "rb") as f:
+            make_model_dict = pickle.load(f)
 
-    df.make_model = df.make_model.map(make_model_dict)
+        df.make_model = df.make_model.map(make_model_dict)
+    except Exception as e:
+        warnings.warn("Error occured while cleaning make_model. This may be "
+                      + "due to running an incorrect version of Python. You "
+                      + "can ignore this if you are just testing out minor "
+                      + f"minor things: {e}")
+        return df_original
 
     return df
 
 
 def new_clean(df, is_test=False, is_catboost=False):
     df = df.copy()
-    
+
     utils.drop_bad_cols(df)
     df = handle_make_model(df, replace_by_bins=True)
 
@@ -257,7 +265,7 @@ def new_clean(df, is_test=False, is_catboost=False):
         "make_model",
     ]:
         df[col] = df[col].astype("category")
-    
+
     if is_catboost:
         df.drop(["make_model"], axis=1, inplace=True)
 
